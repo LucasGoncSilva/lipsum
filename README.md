@@ -1,10 +1,10 @@
 ![The project's banner](https://github.com/LucasGoncSilva/pass_manager/blob/main/readme_banner.svg?raw=true)
 
 
-<h1 align='center'>:notebook: PASSWORD MANAGER :notebook:</h1>
+<h1 align='center'>:notebook: LIPSUS (password manager) :notebook:</h1>
 
 
-<h4 align='justify'>Made with Django as MVC framework, this project was developed for serve as a real, useful online password manager. Uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
+<h4 align='justify'>Made with Django as MVC framework, this project was developed for serving as a real, useful online password manager. It uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/pass_manager?style=for-the-badge)
@@ -27,8 +27,7 @@
 
 
 <p align='center'>:heavy_check_mark: Successfully completed! :heavy_check_mark:</p>
-<p align='center'>:construction: Em andamento... :construction:
-,</p>
+<p align='center'>:construction: Em andamento... :construction:</p>
 
 
 <p align='center'>:link: Check here: https://EDIT :link:</p>
@@ -52,12 +51,13 @@
 <li>Back-end</li>
 <ul>
 <li>Django (framework Python)</li>
-<li>Flask (micro-framework Python)</li>
+</ul>
+<li>Database</li>
+<ul>
+<li>PostgreSQL</li>
 </ul>
 <li>Hosting</li>
 <ul>
-<li>AWS</li>
-<li>Vercel</li>
 <li>Heroku</li>
 </ul>
 </ul>
