@@ -1,7 +1,7 @@
 ![The project's banner](https://github.com/LucasGoncSilva/pass_manager/blob/main/readme_banner.svg?raw=true)
 
 
-<h1 align='center'>:notebook: LIPSUS (password manager) :notebook:</h1>
+<h1 align='center'>:notebook: LIPSUM (password manager) :notebook:</h1>
 
 
 <h4 align='justify'>Made with Django as MVC framework, this project was developed for serving as a real, useful online password manager. It uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
