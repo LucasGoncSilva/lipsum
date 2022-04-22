@@ -1,0 +1,29 @@
+{% extends 'shared/html/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Iniciar Sessão {% endblock %}
+
+
+{% block content %}
+<div class="text-center" style="width: 80vw; margin: 15vh auto;">
+    <h1 class="">Entrar</h1>
+
+    <form action="{% url 'accounts:login' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class='alert alert-danger mt-3 py-2' role='alert'>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <div>
+            <input class="btn btn-outline-success mt-4" type="submit" value="Confirmar" style='width: 40vw;'>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

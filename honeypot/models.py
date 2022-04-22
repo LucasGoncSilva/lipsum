@@ -14,4 +14,4 @@ class Attempt(models.Model):
 
     def __str__(self) -> str:
         date = self.timestamp
-        return f'{self.pk}: {date.day}/{date.month}/{date.year} ({date.hour}h{date.minute}\'{date.second}\")'
+        return f'Tentativa {self.pk}: {date.day}/{date.month}/{date.year} ({date.hour}h{date.minute}\'{date.second}\") UTC+3'
