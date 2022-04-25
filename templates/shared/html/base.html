@@ -1,6 +1,8 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +34,7 @@
     <title>Lipsum | {% block title %}{% endblock %}</title>
 
     <!-- Page icon -->
-    <link rel="shortcut icon" href="{% static 'shared/img/icon.svg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'shared/img/logo.svg' %}" type="image/x-icon">
 
     <!-- Imports -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -40,20 +42,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     {% block imports %}
     {% endblock %}
+
+    <style>
+        :root {
+            --secondaryColor: #000080ff;
+            --accentColor: #6f6fffff;
+        }
+
+        .btn-outline-primary {
+            color: var(--secondaryColor);
+            border-color: var(--secondaryColor);
+        }
+
+        .btn-outline-primary:hover {
+            color: var(--white);
+            background: var(--secondaryColor);
+            border-color: var(--secondaryColor);
+        }
+
+        * {
+            color: var(--secondaryColor);
+            font-family: 'Ubuntu', sans-serif;
+        }
+    </style>
 
 </head>
 
 
 <body>
 
+    {% if user.is_authenticated %}
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="#">
-                    <img src="{% static 'shared/img/logo.svg' %}"
+                    <img src="{% static 'shared/img/logo_txt.svg' %}"
                         alt="Lipsum's logo, the word in blue rounded custom font" height="40">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -94,6 +123,7 @@
             </div>
         </nav>
     </header>
+    {% endif %}
 
     {% block content %}
     {% endblock %}

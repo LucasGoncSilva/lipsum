@@ -1,18 +1,33 @@
 {% extends 'shared/html/base.html' %}
+{% load static %}
 
 
 {% block title %} Encerrar Sessão {% endblock %}
 
 
+{% block imports %}
+<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<div class="text-center position-absolute top-50 start-50 translate-middle">
-    <h1 class="mb-5">Confirmar saída?</h1>
+<div class="text-center">
+
+    <img src="{% static 'shared/img/logo_txt.svg' %}" alt="Lipsum's logo, the word in blue rounded custom font">
+    <h5>Gerenciador de senhas online e intuitivo.</h5>
+    <hr>
+    <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
 
     <form action="{% url 'accounts:logout' %}" method="post">
         {% csrf_token %}
+
+        <h1>Confirmar saída?</h1>
+
         <input class="my-2 btn btn-danger btn-lg" type="submit" value="Confirmar">
+
+        <button onclick="history.back()" class="my-2 btn btn-outline-secondary btn-lg">Cancelar</button>
+
     </form>
 
-    <button onclick="history.back()" class="my-2 btn btn-outline-secondary btn-lg">Cancelar</button>
 </div>
 {% endblock %}

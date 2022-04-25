@@ -1,16 +1,29 @@
 {% extends 'shared/html/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 
 {% block title %} Iniciar Sessão {% endblock %}
 
 
+{% block imports %}
+<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<div class="text-center" style="width: 80vw; margin: 15vh auto;">
-    <h1 class="">Entrar</h1>
+<div class="text-center">
+
+    <img src="{% static 'shared/img/logo_txt.svg' %}" alt="Lipsum's logo, the word in blue rounded custom font">
+    <h5>Gerenciador de senhas online e intuitivo.</h5>
+    <hr>
+    <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
+
 
     <form action="{% url 'accounts:login' %}" method="post" autocomplete="off">
         {% csrf_token %}
+
+        <h1>Entrar</h1>
 
         {{ form|crispy }}
 
@@ -21,9 +34,10 @@
         {% endif %}
 
         <div>
-            <input class="btn btn-outline-success mt-4" type="submit" value="Confirmar" style='width: 40vw;'>
+            <input id="confirm-btn" class="btn btn-outline-primary mt-4" type="submit" value="Confirmar">
         </div>
 
     </form>
+
 </div>
 {% endblock %}

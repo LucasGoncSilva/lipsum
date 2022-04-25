@@ -1,0 +1,38 @@
+body {
+    height: 90vh;
+    padding: 1vw;
+    display: grid;
+    place-items: center;
+}
+
+body>div {
+    display: grid;
+    place-items: center;
+}
+
+img {
+    height: 60px;
+}
+
+hr {
+    border-color: var(--accentColor);
+    width: 40vw;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+form {
+    width: 90vw;
+    max-width: 1000px;
+    margin-top: 5vh;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 1vw;
+    box-shadow: 0 0 15px var(--accentColor);
+}
+
+#confirm-btn {
+    width: 100%;
+}
