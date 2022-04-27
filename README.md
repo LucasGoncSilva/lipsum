@@ -4,7 +4,7 @@
 <h1 align='center'>:notebook: LIPSUM (password manager) :notebook:</h1>
 
 
-<h4 align='justify'>Made with Django as MVC framework, this project was developed for serving as a real, useful online password manager. It uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
+<h4 align='justify'>Made with Django as MVC framework, this project works for serving as a real, useful online password manager. It uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/pass_manager?style=for-the-badge)
@@ -26,8 +26,8 @@
 <h2 align='center'>:chart_with_upwards_trend: Project's Status :chart_with_upwards_trend:</h2>
 
 
-<p align='center'>:heavy_check_mark: Successfully completed! :heavy_check_mark:</p>
-<p align='center'>:construction: Em andamento... :construction:</p>
+<!-- <p align='center'>:heavy_check_mark: Successfully completed! :heavy_check_mark:</p> -->
+<p align='center'>:construction: Work in progress... :construction:</p>
 
 
 <p align='center'>:link: Check here: https://EDIT :link:</p>
@@ -70,11 +70,11 @@
 <h2 align='center'>:star: Features :star:</h2>
 
 
-- [x] 
-- [x] 
-- [x] 
-- [x] 
-- [x] 
+- [x] Save different services, even more than one save per services (e.g. two Instagram's accounts)
+- [x] Save login's info for each saved service, such as email, username and password
+- [x] Edit saved secrets once they get altered on the respective service
+- [x] Export your secrets to your email (the same used for login in this app)
+- [x] Generate locally pseudo-random passwords as platform suggestion
 
 
 <!-- Graph right here
