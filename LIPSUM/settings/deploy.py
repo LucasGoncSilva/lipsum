@@ -1,6 +1,6 @@
 import environ
 
-from PASS_MANAGER.settings.base import *
+from LIPSUM.settings.base import *
 
 
 env = environ.Env()

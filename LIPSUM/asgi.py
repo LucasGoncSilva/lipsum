@@ -1,5 +1,5 @@
 """
-ASGI config for PASS_MANAGER project.
+ASGI config for LIPSUM project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PASS_MANAGER.settings.base')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LIPSUM.settings.deploy')
 
 application = get_asgi_application()

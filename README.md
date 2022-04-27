@@ -132,22 +132,6 @@ py .py
 ``` -->
 
 
-<!-- Instale as dependências do projeto
-```cmd
-npm i
-
-
-```
-
-
-Execute o comando responsável por iniciar a aplicação
-```cmd
-npm run app
-
-
-``` -->
-
-
 <br>
 <hr>
 

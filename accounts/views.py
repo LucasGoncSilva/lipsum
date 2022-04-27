@@ -38,7 +38,7 @@ class LogInForm(forms.Form):
 
 def login_view(request: object) -> object:
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('hub'))
+        return HttpResponseRedirect(reverse('home:index'))
 
     elif request.method == 'POST':
         form = LogInForm(request.POST)
@@ -59,7 +59,7 @@ def login_view(request: object) -> object:
 
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('hub'))
+                return HttpResponseRedirect(reverse('home:index'))
 
             messages.error(request, 'Senha inválida')
             return render(request, 'accounts/login.html', {
