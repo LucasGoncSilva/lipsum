@@ -1,3 +1,5 @@
+@import '../../shared/css/constants';
+
 body > div {
     margin-top: 20vh;
     display: grid;
@@ -9,7 +11,7 @@ body > div {
 }
 
 hr {
-    border-color: var(--accentColor);
+    border-color: $accent-color;
     width: 40vw;
 }
 
@@ -24,8 +26,8 @@ form {
     padding: 1rem;
     border: 1px solid transparent;
     border-radius: 1rem;
-    box-shadow: 0 0 15px var(--accentColor);
-    background: var(--mainColor);
+    box-shadow: 0 0 15px $accent-color;
+    background: $main-color;
 }
 
 #confirm-btn {

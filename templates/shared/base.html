@@ -45,48 +45,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'shared/css/base.css' %}">
+
     {% block imports %}
     {% endblock %}
-
-    <style>
-        :root {
-            --backgroundColor: #f0f0ff;
-            --mainColor: #ffff;
-            --secondaryColor: #000080ff;
-            --accentColor: #6f6fffff;
-        }
-
-        .nav-link {
-            color: var(--secondary-color);
-        }
-
-        .btn-outline-primary {
-            color: var(--secondaryColor);
-            border-color: var(--secondaryColor);
-        }
-
-        .btn-outline-primary:hover {
-            color: var(--white);
-            background: var(--secondaryColor);
-            border-color: var(--secondaryColor);
-        }
-
-        * {
-            color: var(--secondaryColor);
-            font-family: 'Ubuntu', sans-serif;
-        }
-
-        body {
-            background: var(--backgroundColor);
-        }
-    </style>
 
 </head>
 
 
 <body>
 
-    <header style="box-shadow: 0 0 5px var(--accentColor); margin-bottom: 1vh;">
+    <header>
         <nav class="navbar navbar-expand-lg bg-light px-5">
             <div class="container-fluid">
 

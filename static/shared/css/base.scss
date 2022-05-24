@@ -1,0 +1,27 @@
+@import 'constants';
+
+.nav-link {
+    color: $secondary-color;
+}
+
+.btn-outline-primary {
+    color: $secondary-color;
+    border-color: $secondary-color;
+}
+
+.btn-outline-primary:hover {
+    color: var(--white);
+    background: $secondary-color;
+    border-color: $secondary-color;
+}
+
+body {
+    color: $secondary-color;
+    font-family: 'Ubuntu', sans-serif;
+    background: $background-color;
+
+    header {
+        box-shadow: 0 0 5px $accent-color;
+        margin-bottom: 1vh;
+    }
+}
