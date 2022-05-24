@@ -1,97 +1,47 @@
 <!DOCTYPE html>
-
 <html lang="pt-br" dir="ltr">
-
 <head>
     <title>Acessar | Site de administração do Django</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
-
     <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
     <script src="/static/admin/js/nav_sidebar.js" defer></script>
-
     <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
-
-
-
-
-
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
-
-
     <meta name="robots" content="NONE,NOARCHIVE">
 </head>
-
 <body class=" login" data-admin-utc-offset="-10800">
-
     <!-- Container -->
     <div id="container">
-
-
         <!-- Header -->
-
         <div id="header">
             <div id="branding">
-
                 <h1 id="site-name"><a href="/admin/">Administração do Django</a></h1>
-
             </div>
-
-
         </div>
-
         <!-- END Header -->
-
-
-
         <div class="main" id="main">
-
-
-
             <div class="content">
-
-
-
                 <!-- Content -->
                 <div id="content" class="colM">
-
-
-
-
-
-
-
-
                     <div id="content-main">
-
-
-
-                        <form action="{% url 'honeypot:honeypot' %}?next={{ next }}" method="post"
-                            id="login-form">
+                        <form action="{% url 'honeypot:honeypot' %}?next={{ next }}" method="post" id="login-form">
                             {% csrf_token %}
-
                             <div class="form-row">
-
                                 <label for="id_username" class="required">Usuário:</label> <input type="text"
                                     name="username" autofocus autocapitalize="none" autocomplete="username"
                                     maxlength="150" required id="id_username">
                             </div>
                             <div class="form-row">
-
                                 <label for="id_password" class="required">Senha:</label> <input type="password"
                                     name="password" autocomplete="current-password" required id="id_password">
                                 <input type="hidden" name="next" value="/admin/">
                             </div>
-
-
                             <div class="submit-row">
                                 <input type="submit" value="Acessar">
                             </div>
                         </form>
-
                     </div>
-
-
                     <br class="clear">
                 </div>
                 <!-- END Content -->
@@ -101,5 +51,4 @@
     </div>
     <!-- END Container -->
 </body>
-
 </html>
