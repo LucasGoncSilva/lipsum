@@ -13,10 +13,12 @@
 {% block content %}
 <div class="text-center">
 
-    <img src="{% static 'shared/img/logo_txt.svg' %}" alt="Lipsum's logo, the word in blue rounded custom font">
-    <h5>Gerenciador de senhas online e intuitivo.</h5>
-    <hr>
-    <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
+    <div>
+        <img src="{% static 'shared/img/logo_txt.svg' %}" alt="Lipsum's logo, the word in blue rounded custom font">
+        <h5>Gerenciador de senhas online e intuitivo.</h5>
+        <hr>
+        <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
+    </div>
 
     <form action="{% url 'accounts:logout' %}" method="post">
         {% csrf_token %}

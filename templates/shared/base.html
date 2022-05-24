@@ -50,7 +50,7 @@
 
     <style>
         :root {
-            --backgroundColor: #ccff;
+            --backgroundColor: #f0f0ff;
             --mainColor: #ffff;
             --secondaryColor: #000080ff;
             --accentColor: #6f6fffff;
@@ -74,6 +74,10 @@
         * {
             color: var(--secondaryColor);
             font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            background: var(--backgroundColor);
         }
     </style>
 
@@ -128,16 +132,17 @@
                     </ul>
                     {% endif %}
 
-                    
+
                     <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="navbar-brand nav-link" href="#">Link</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="navbar-brand nav-link" href="#">Sobre</a>
                         </li>
                     </ul>
+
 
                     {% if user.is_authenticated %}
                     <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger px-4">Encerrar Sessão</a>
