@@ -4,15 +4,24 @@
     color: $secondary-color;
 }
 
+.btn-primary {
+    background: $secondary-color;
+    border-color: $secondary-color;
+
+    &:hover, &:focus {
+        background: darken($secondary-color, 10);
+        border-color: $secondary-color;
+    }
+}
+
 .btn-outline-primary {
     color: $secondary-color;
     border-color: $secondary-color;
-}
 
-.btn-outline-primary:hover {
-    color: var(--white);
-    background: $secondary-color;
-    border-color: $secondary-color;
+    &:hover, &:focus {
+        background: $secondary-color;
+        border-color: $secondary-color;
+    }
 }
 
 body {
