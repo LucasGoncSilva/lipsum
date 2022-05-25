@@ -1,9 +1,44 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block title %} Gerenciador de senhas online, simples e intuitivo, capaz de armazenar diversos serviços, usuários e
 senhas, sempre utilizando criptografia. {% endblock %}
 
 
+{% block imports %}
+<link rel="stylesheet" href="{% static 'home/landing/css/style.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<h1>landing page here</h1>
+<section id="section-1">
+    <div id="landing-container">
+        <div>
+            <h1>Suas senhas protegem segredos.</h1>
+            <h1>Proteja suas senhas.</h1>
+            <div class="text-center">
+                <a href="#" class="btn btn-primary btn-lg px-5 mt-4 mx-auto">Iniciar agora</a>
+            </div>
+        </div>
+
+        <img id="locker" src="{% static 'home/landing/img/locker.png' %}"
+            alt="Desenho 3D de um cofre branco em pespectiva.">
+    </div>
+
+    <div class="custom-shape-divider-bottom-1653436663">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                class="shape-fill"></path>
+        </svg>
+    </div>
+</section>
+
+<section id="section-2">
+    <h1>Por que preciso do Lipsum?</h1>
+    necessario - gerenciar senhas - notebook
+    seguro - cripto - link
+    online - nada local - wifi
+    gratis - ...gratis - wallet
+</section>
 {% endblock %}
