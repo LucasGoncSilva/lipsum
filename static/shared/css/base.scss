@@ -1,5 +1,21 @@
 @import 'constants';
 
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    background: lighten(#6f6fff, 10);
+}
+
+::-webkit-scrollbar-thumb {
+    background: $accent-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darken(#6f6fff, 10);
+}
+
 .nav-link {
     color: $secondary-color;
 }
@@ -10,7 +26,7 @@
 
     &:hover,
     &:focus {
-        background: darken($secondary-color, 10);
+        background: darken(#000080, 10);
         border-color: $secondary-color;
     }
 }
@@ -29,7 +45,7 @@
 body {
     color: $secondary-color;
     font-family: 'Ubuntu', sans-serif;
-    background: $accent-color;
+    background: $background-color;
     overflow-x: hidden;
 
     header {
