@@ -81,7 +81,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="navbar-brand nav-link" href="#">Link</a>
+                            <a class="navbar-brand nav-link" href="#">Dashboard</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -104,9 +104,13 @@
 
 
                     <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+
+                        {% else %}
                         <li class="nav-item">
-                            <a class="navbar-brand nav-link" href="#">Link</a>
+                            <a class="navbar-brand nav-link" href="#">Serviços</a>
                         </li>
+                        {% endif %}
 
                         <li class="nav-item">
                             <a class="navbar-brand nav-link" href="#">Sobre</a>
