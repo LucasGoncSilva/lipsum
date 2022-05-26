@@ -8,7 +8,8 @@
     background: $secondary-color;
     border-color: $secondary-color;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: darken($secondary-color, 10);
         border-color: $secondary-color;
     }
@@ -18,7 +19,8 @@
     color: $secondary-color;
     border-color: $secondary-color;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: $secondary-color;
         border-color: $secondary-color;
     }
@@ -27,7 +29,8 @@
 body {
     color: $secondary-color;
     font-family: 'Ubuntu', sans-serif;
-    background: $background-color;
+    background: $accent-color;
+    overflow-x: hidden;
 
     header {
         box-shadow: 0 0 5px $accent-color;

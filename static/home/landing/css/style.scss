@@ -43,11 +43,44 @@
     position: relative;
     color: $main-color;
     background: $secondary-color;
+    height: fit-content;
 
     h1 {
         text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    & > div {
+        width: 1200px;
+        margin: auto;
+        display: grid;
+        place-items: center;
+        grid-template-columns: auto auto;
+        row-gap: 50px;
+
+        div {
+            text-align: center;
+            width: 300px;
+
+            &:nth-child(even) {
+                transform: translateY(100px);
+            }
+
+            img {
+                height: 150px;
+            }
+        }
+    }
+
+    & > img {
+        margin: 0;
+        padding: 0;
     }
 }
+
+// #section-3 {
+// transform: translateY(-300px);
+// }
 
 @keyframes swing {
     to {
