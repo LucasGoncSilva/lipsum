@@ -78,9 +78,20 @@
     }
 }
 
-// #section-3 {
-// transform: translateY(-300px);
-// }
+#section-3 {
+    & > div {
+        width: 40vw;
+        margin: 15vh auto;
+        display: grid;
+        place-items: center;
+        grid-template-columns: auto auto;
+
+        #zoom {
+            height: 200px;
+            animation: swing 6s ease-in-out infinite alternate;
+        }
+    }
+}
 
 @keyframes swing {
     to {
