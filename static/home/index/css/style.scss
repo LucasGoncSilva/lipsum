@@ -1,10 +1,16 @@
 @import '../../../shared/css/constants';
 
-#grid {
+section {
+    width: fit-content;
+}
+
+.grid {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
+    column-gap: 10vw;
     place-items: center;
 
+    & > div,
     #credentials,
     #credit-cards,
     #notes {
@@ -14,49 +20,50 @@
         display: grid;
         grid-template-columns: auto;
         row-gap: 1rem;
-        border-radius: .5rem;
-        
+        border-radius: 0.5rem;
+
         a {
             color: $secondary-color;
             text-decoration: none;
+        }
 
-            div {
-                width: 400px;
-                display: grid;
-                grid-template-columns: 20% auto;
-                place-items: center start;
-                border: 1px solid $accent-color;
-                border-radius: .5rem;
-                transition: 300ms;
+        div {
+            width: 400px;
+            display: grid;
+            grid-template-columns: 20% auto;
+            place-items: center start;
+            border: 1px solid $accent-color;
+            border-radius: 0.5rem;
+            transition: 300ms;
 
-                &:hover {
-                    color: $main-color;
-                    background: $secondary-color;
-                }
-    
-                h5 {
-                    transform: translateY(.2em);
-                }
-    
-                // img {
-                //     height: 50px;
-                // }
-            }
-
-            .action {
+            &:hover:not(.info) {
                 color: $main-color;
-                background: $accent-color;
+                background: $secondary-color;
             }
+
+            h5 {
+                transform: translateY(0.2em);
+            }
+
+            // img {
+            //     height: 50px;
+            // }
+        }
+
+        .action {
+            color: $main-color;
+            background: $accent-color;
         }
     }
-    
 }
 
-#line1 {
+.line {
     width: 100vw;
     overflow: hidden;
 
-    svg  {
+    svg {
         stroke: $accent-color;
     }
 }
+
+@import 'medias';
