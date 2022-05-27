@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "style.scss",
+        "../../../shared/css/_constants.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}
