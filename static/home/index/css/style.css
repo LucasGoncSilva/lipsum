@@ -1,1 +1,2 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+#grid{display:-ms-grid;display:grid;-ms-grid-columns:auto auto auto;grid-template-columns:auto auto auto;place-items:center}#grid #credentials,#grid #credit-cards,#grid #notes{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;display:-ms-grid;display:grid;-ms-grid-columns:auto;grid-template-columns:auto;row-gap:1rem;border:1px solid #6f6fffff;border-radius:.5rem}#grid #credentials div,#grid #credit-cards div,#grid #notes div{width:400px;display:-ms-grid;display:grid;-ms-grid-columns:20% auto;grid-template-columns:20% auto;place-items:center start;background:#ffff;border-radius:.5rem}#line1{width:100vw;overflow:hidden}#line1 svg{stroke:#6f6fffff}
+/*# sourceMappingURL=style.css.map */

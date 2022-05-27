@@ -1,3 +1,41 @@
 @import '../../../shared/css/constants';
 
+#grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    place-items: center;
 
+    #credentials,
+    #credit-cards,
+    #notes {
+        width: fit-content;
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 1rem;
+        border: 1px solid $accent-color;
+        border-radius: .5rem;
+
+        div {
+            width: 400px;
+            display: grid;
+            grid-template-columns: 20% auto;
+            place-items: center start;
+            background: $main-color;
+            border-radius: .5rem;
+
+            // img {
+            //     height: 50px;
+            // }
+        }
+    }
+    
+}
+
+#line1 {
+    width: 100vw;
+    overflow: hidden;
+
+    svg  {
+        stroke: $accent-color;
+    }
+}
