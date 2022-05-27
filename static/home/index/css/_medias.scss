@@ -1,0 +1,140 @@
+@media screen and (max-width: 767px) {
+    @import '../../../shared/css/constants';
+
+    section {
+        width: fit-content;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 10vw;
+        place-items: center;
+
+        & > div,
+        #credentials,
+        #credit-cards,
+        #notes {
+            background: $main-color;
+            box-shadow: 0 0 15px $accent-color;
+            width: fit-content;
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 1rem;
+            border-radius: 0.5rem;
+
+            a {
+                color: $secondary-color;
+                text-decoration: none;
+            }
+
+            div {
+                width: 60vw;
+                display: grid;
+                grid-template-columns: 30% auto;
+                place-items: center start;
+                border: 1px solid $accent-color;
+                border-radius: 0.5rem;
+                transition: 300ms;
+                
+                &:hover:not(.info) {
+                    color: $main-color;
+                    background: $secondary-color;
+                }
+                
+                h5 {
+                    transform: translateY(0.2em);
+                    font-size: .8rem;
+                }
+
+                // img {
+                //     height: 50px;
+                // }
+            }
+
+            .action {
+                color: $main-color;
+                background: $accent-color;
+            }
+        }
+    }
+
+    .line {
+        width: 100vw;
+        overflow: hidden;
+
+        svg {
+            stroke: $accent-color;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    @import '../../../shared/css/constants';
+
+    section {
+        width: fit-content;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 10vw;
+        place-items: center;
+
+        & > div,
+        #credentials,
+        #credit-cards,
+        #notes {
+            background: $main-color;
+            box-shadow: 0 0 15px $accent-color;
+            width: fit-content;
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 1rem;
+            border-radius: 0.5rem;
+
+            a {
+                color: $secondary-color;
+                text-decoration: none;
+            }
+
+            div {
+                width: 400px;
+                display: grid;
+                grid-template-columns: 20% auto;
+                place-items: center start;
+                border: 1px solid $accent-color;
+                border-radius: 0.5rem;
+                transition: 300ms;
+
+                &:hover:not(.info) {
+                    color: $main-color;
+                    background: $secondary-color;
+                }
+
+                h5 {
+                    transform: translateY(0.2em);
+                }
+
+                // img {
+                //     height: 50px;
+                // }
+            }
+
+            .action {
+                color: $main-color;
+                background: $accent-color;
+            }
+        }
+    }
+
+    .line {
+        width: 100vw;
+        overflow: hidden;
+
+        svg {
+            stroke: $accent-color;
+        }
+    }
+}
