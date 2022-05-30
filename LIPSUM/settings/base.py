@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'honeypot',
     'home',
+    'secret',
 ]
 
 MIDDLEWARE = [

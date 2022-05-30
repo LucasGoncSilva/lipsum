@@ -9,6 +9,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     # User's pages
     path('', include('home.urls')),
+    path('secret/', include('secret.urls')),
 ]
 
 # handler403 = 'hub.views.error403'
