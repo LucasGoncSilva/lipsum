@@ -1,26 +1,27 @@
 from django.db import models
+from django.urls import reverse
 
 from accounts.models import User
 
 
 # Create your models here.
 class LoginCredential(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credentials')
-    name = models.CharField(max_length=40)
-    service = models.CharField(max_length=64)
-    thirdy_party_login = models.BooleanField()
-    thirdy_party_login_name = models.CharField(max_length=40, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credentials', verbose_name='Dono')
+    service = models.CharField(max_length=64, verbose_name='Serviço')
+    name = models.CharField(max_length=40, verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)')
+    thirdy_party_login = models.BooleanField(verbose_name='Login com serviço de terceiro?')
+    thirdy_party_login_name = models.CharField(max_length=40, blank=True, null=True, verbose_name='Apelido do serviço de terceiro')
     login = models.CharField(max_length=200, blank=True, null=True)
-    password = models.CharField(max_length=200, blank=True, null=True)
-    note = models.TextField(max_length=128, blank=True, null=True)
+    password = models.CharField(max_length=200, blank=True, null=True, verbose_name='Senha')
+    note = models.TextField(max_length=128, blank=True, null=True, verbose_name='Anotação particular')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.name
 
-    def get_my_model_name(self):
-        return self._meta.model_name
+    def get_absolute_url(self) -> object:
+        return reverse('secret:credential_detail_view', args=(str(self.id)))
 
     class Meta:
         ordering = ['-created']

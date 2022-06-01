@@ -28,7 +28,13 @@ class CredentialDetailView(DetailView):
 
 class CredentialCreateView(CreateView):
     model = LoginCredential
-    template_name = 'secret/Credential/create_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(CredentialCreateView, self).get_context_data(**kwargs)
+        context['model_name'] = 'Credenciais'
+        return context
 
 
 class CredentialUpdateView(UpdateView):
