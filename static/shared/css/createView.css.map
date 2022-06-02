@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,IAAI,AAAC,CACD,SAAS,CAAE,KAAK,CACnB,AAED,AAAA,IAAI,CAAC,CAAC,AAAC,CACH,KAAK,CAAE,gBAAgB,CAC1B,AAED,AAAA,KAAK,AAAC,CACF,OAAO,CAAE,IAAI,CAChB,AAED,AAAA,QAAQ,AAAC,CACL,UAAU,CCdD,KAAK,CDed,aAAa,CAAE,IAAI,CACtB",
+    "sources": [
+        "createView.scss",
+        "_constants.scss"
+    ],
+    "names": [],
+    "file": "createView.css"
+}

@@ -1,0 +1,18 @@
+@import 'constants';
+
+form {
+    max-width: 800px;
+}
+
+form * {
+    float: unset !important;
+}
+
+.hide {
+    display: none;
+}
+
+#exclude {
+    background: $main-color;
+    border-radius: 2rem;
+}

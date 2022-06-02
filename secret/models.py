@@ -10,15 +10,15 @@ class LoginCredential(models.Model):
     service = models.CharField(max_length=64, verbose_name='Serviço')
     name = models.CharField(max_length=40, verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)')
     thirdy_party_login = models.BooleanField(verbose_name='Login com serviço de terceiro?')
-    thirdy_party_login_name = models.CharField(max_length=40, blank=True, null=True, verbose_name='Apelido do serviço de terceiro')
-    login = models.CharField(max_length=200, blank=True, null=True)
-    password = models.CharField(max_length=200, blank=True, null=True, verbose_name='Senha')
+    thirdy_party_login_name = models.CharField(max_length=40, verbose_name='Apelido do serviço de terceiro')
+    login = models.CharField(max_length=200, verbose_name='Login')
+    password = models.CharField(max_length=200, verbose_name='Senha')
     note = models.TextField(max_length=128, blank=True, null=True, verbose_name='Anotação particular')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.name
+        return f'{str(self.owner.first_name)} | {self.service} | {self.name}'
 
     def get_absolute_url(self) -> object:
         return reverse('secret:credential_detail_view', args=(str(self.id)))
@@ -42,7 +42,10 @@ class Card(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.name
+        return f'{str(self.owner.first_name)} | {self.model} | {self.name}'
+
+    def get_absolute_url(self) -> object:
+        return reverse('secret:card_detail_view', args=(str(self.id)))
 
     class Meta:
         ordering = ['-created']
@@ -56,7 +59,10 @@ class SecurityNote(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.name
+        return f'{str(self.owner.first_name)} | {self.name}'
+
+    def get_absolute_url(self) -> object:
+        return reverse('secret:note_detail_view', args=(str(self.id)))
 
     class Meta:
         ordering = ['-created']

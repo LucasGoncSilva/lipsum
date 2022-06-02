@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
 
 from .models import Card, LoginCredential, SecurityNote
@@ -11,14 +12,10 @@ def index(request):
 
 
 # Credentials views
-class CredentialListView(ListView):
-    model = LoginCredential
-    template_name = 'secret/list_view.html'
-
-    def get_context_data(self,**kwargs):
-        context = super(CredentialListView, self).get_context_data(**kwargs)
-        context['model_name'] = 'Credenciais'
-        return context
+def credential_list_view(request) -> object:
+    return render(request, 'secret/list_view.html', {
+        'object_list': request.user.credentials.all(),
+    })
 
 
 class CredentialDetailView(DetailView):
@@ -33,29 +30,40 @@ class CredentialCreateView(CreateView):
 
     def get_context_data(self,**kwargs):
         context = super(CredentialCreateView, self).get_context_data(**kwargs)
-        context['model_name'] = 'Credenciais'
+        context['action'] = 'Adição'
+        context['model'] = 'Credencial'
         return context
 
 
 class CredentialUpdateView(UpdateView):
     model = LoginCredential
-    template_name = 'secret/Credential/update_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(CredentialUpdateView, self).get_context_data(**kwargs)
+        context['action'] = 'Edição'
+        context['model'] = 'Credencial'
+        return context
 
 
 class CredentialDeleteView(DeleteView):
     model = LoginCredential
-    template_name = 'secret/Credential/delete_view.html'
+    template_name = 'secret/delete_view.html'
+    success_url = '/secret/credentials'
+
+    def get_context_data(self,**kwargs):
+        context = super(CredentialDeleteView, self).get_context_data(**kwargs)
+        context['action'] = 'Exclusão'
+        context['model'] = 'Credencial'
+        return context
 
 
 # Cards views
-class CardListView(ListView):
-    model = Card
-    template_name = 'secret/list_view.html'
-
-    def get_context_data(self,**kwargs):
-        context = super(CardListView, self).get_context_data(**kwargs)
-        context['model_name'] = 'Cartões'
-        return context
+def card_list_view(request) -> object:
+    return render(request, 'secret/list_view.html', {
+        'object_list': request.user.cards.all(),
+    })
 
 
 class CardDetailView(DetailView):
@@ -65,28 +73,45 @@ class CardDetailView(DetailView):
 
 class CardCreateView(CreateView):
     model = Card
-    template_name = 'secret/Card/create_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(CardCreateView, self).get_context_data(**kwargs)
+        context['action'] = 'Adição'
+        context['model'] = 'Cartão'
+        return context
 
 
 class CardUpdateView(UpdateView):
     model = Card
-    template_name = 'secret/Card/update_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(CardUpdateView, self).get_context_data(**kwargs)
+        context['action'] = 'Edição'
+        context['model'] = 'Cartão'
+        return context
 
 
 class CardDeleteView(DeleteView):
     model = Card
-    template_name = 'secret/Card/delete_view.html'
+    template_name = 'secret/delete_view.html'
+    success_url = '/secret/credentials'
+
+    def get_context_data(self,**kwargs):
+        context = super(CardDeleteView, self).get_context_data(**kwargs)
+        context['action'] = 'Exclusão'
+        context['model'] = 'Cartão'
+        return context
 
 
 # Security Notes views
-class NoteListView(ListView):
-    model = SecurityNote
-    template_name = 'secret/list_view.html'
-
-    def get_context_data(self,**kwargs):
-        context = super(NoteListView, self).get_context_data(**kwargs)
-        context['model_name'] = 'Anotações'
-        return context
+def note_list_view(request) -> object:
+    return render(request, 'secret/list_view.html', {
+        'object_list': request.user.notes.all(),
+    })
 
 
 class NoteDetailView(DetailView):
@@ -96,14 +121,35 @@ class NoteDetailView(DetailView):
 
 class NoteCreateView(CreateView):
     model = SecurityNote
-    template_name = 'secret/Note/create_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(NoteCreateView, self).get_context_data(**kwargs)
+        context['action'] = 'Adição'
+        context['model'] = 'Anotação'
+        return context
 
 
 class NoteUpdateView(UpdateView):
     model = SecurityNote
-    template_name = 'secret/Note/update_view.html'
+    template_name = 'secret/create_view.html'
+    fields = '__all__'
+
+    def get_context_data(self,**kwargs):
+        context = super(NoteUpdateView, self).get_context_data(**kwargs)
+        context['action'] = 'Edição'
+        context['model'] = 'Anotação'
+        return context
 
 
 class NoteDeleteView(DeleteView):
     model = SecurityNote
-    template_name = 'secret/Note/delete_view.html'
+    template_name = 'secret/delete_view.html'
+    success_url = '/secret/credentials'
+
+    def get_context_data(self,**kwargs):
+        context = super(NoteDeleteView, self).get_context_data(**kwargs)
+        context['action'] = 'Exclusão'
+        context['model'] = 'Anotação'
+        return context
