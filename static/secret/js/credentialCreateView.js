@@ -9,13 +9,13 @@ window.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form')
 
 
-  if (thirdyPartyCheck.checked === true) {
-    login.value = ''
-    password.value = ''
+  if (thirdyPartyCheck.checked) {
+    login.value = '-----'
+    password.value = '-----'
     loginDiv.classList.add('hide')
     passwordDiv.classList.add('hide')
   } else {
-    thirdyPartyLogin.value = ''
+    thirdyPartyLogin.value = '-----'
     thirdyPartyLoginDiv.classList.add('hide')
   }
 
@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', function () {
     if (this.checked) {
       login.value = '-----'
       password.value = '-----'
-      thirdyPartyLogin.value = ''
       toggleFields()
+      thirdyPartyLogin.value = ''
     } else {
       thirdyPartyLogin.value = '-----'
       toggleFields()
@@ -42,11 +42,11 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   form.onsubmit = function () {
-    if (thirdyPartyCheck.checked) {
+    if (!thirdyPartyCheck.checked) {
+      thirdyPartyLogin.value = '-----'
+    } else {
       login.value = '-----'
       password.value = '-----'
-    } else {
-      thirdyPartyLogin.value = '-----'
     }
   }
 })

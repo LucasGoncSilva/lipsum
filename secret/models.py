@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 from accounts.models import User
+from .choices import cards_choices, services_choices
 
 
 # Create your models here.
@@ -13,7 +14,7 @@ class LoginCredential(models.Model):
         related_name='credentials',
         verbose_name='Dono'
     )
-    service: object = models.CharField(max_length=64, verbose_name='Serviço')
+    service: object = models.CharField(max_length=64, choices=services_choices, verbose_name='Serviço')
     name: object = models.CharField(
         max_length=40,
         verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
@@ -45,13 +46,6 @@ class LoginCredential(models.Model):
 
 
 class Card(models.Model):
-    cards_choices = [
-        ('Débito', 'Débito'),
-        ('Crédito', 'Crédito'),
-        ('Pré-pago', 'Pré-pago'),
-        ('Co-branded', 'Co-branded'),
-    ]
-
     owner: object = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
