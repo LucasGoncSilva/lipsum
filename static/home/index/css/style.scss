@@ -4,6 +4,13 @@ section {
     width: fit-content;
 }
 
+hr:not(header hr) {
+    margin: auto;
+    width: 80%;
+    border: 2px solid $accent-color;
+    border-radius: 100%;
+}
+
 .grid {
     display: grid;
     grid-template-columns: auto auto;
@@ -11,9 +18,7 @@ section {
     place-items: center;
 
     & > div,
-    #credentials,
-    #credit-cards,
-    #notes {
+    fieldset {
         background: $main-color;
         box-shadow: 0 0 15px $accent-color;
         width: fit-content;
@@ -45,24 +50,15 @@ section {
                 transform: translateY(0.2em);
             }
 
-            // img {
-            //     height: 50px;
-            // }
+            img {
+                height: 50px;
+            }
         }
 
         .action {
             color: $main-color;
             background: $accent-color;
         }
-    }
-}
-
-.line {
-    width: 100vw;
-    overflow: hidden;
-
-    svg {
-        stroke: $accent-color;
     }
 }
 

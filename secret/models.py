@@ -38,7 +38,7 @@ class LoginCredential(models.Model):
     def __str__(self) -> str:
         return f'{str(self.owner.first_name)} | {self.service} | {self.name}'
 
-    def get_absolute_url(self) -> object:
+    def get_absolute_url(self) -> str:
         return reverse('secret:credential_detail_view', args=(str(self.id)))
 
     class Meta:
@@ -82,7 +82,7 @@ class Card(models.Model):
     def __str__(self) -> str:
         return f'{str(self.owner.first_name)} | {self.model} | {self.name}'
 
-    def get_absolute_url(self) -> object:
+    def get_absolute_url(self) -> str:
         return reverse('secret:card_detail_view', args=(str(self.id)))
 
     class Meta:
@@ -104,7 +104,7 @@ class SecurityNote(models.Model):
     def __str__(self) -> str:
         return f'{str(self.owner.first_name)} | {self.title}'
 
-    def get_absolute_url(self) -> object:
+    def get_absolute_url(self) -> str:
         return reverse('secret:note_detail_view', args=(str(self.id)))
 
     class Meta:
