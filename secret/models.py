@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 from accounts.models import User
-from .choices import cards_choices, services_choices
+from .choices import cards_banks, cards_brands, cards_types, credentials_services
 
 
 # Create your models here.
@@ -14,7 +14,7 @@ class LoginCredential(models.Model):
         related_name='credentials',
         verbose_name='Dono'
     )
-    service: object = models.CharField(max_length=64, choices=services_choices, verbose_name='Serviço')
+    service: object = models.CharField(max_length=64, choices=credentials_services, verbose_name='Serviço')
     name: object = models.CharField(
         max_length=40,
         verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
@@ -56,19 +56,19 @@ class Card(models.Model):
         max_length=40,
         verbose_name='Apelido (ex: Cartão da Família, Cartão de Milhas)'
     )
-    model: object = models.CharField(
+    card_type: object = models.CharField(
         max_length=16,
-        choices=cards_choices,
+        choices=cards_types,
         verbose_name='Tipo (débito, crédito, ...)'
     )
     number: object = models.CharField(max_length=19, verbose_name='Número do Cartão')
     expiration: object = MonthField(verbose_name='Data de Expiração')
     cvv: object = models.CharField(max_length=4, verbose_name='cvv')
-    bank: object = models.CharField(max_length=64, verbose_name='Banco')
-    brand: object = models.CharField(max_length=64, verbose_name='Bandeira')
+    bank: object = models.CharField(max_length=64, choices=cards_banks,verbose_name='Banco')
+    brand: object = models.CharField(max_length=64, choices=cards_brands,verbose_name='Bandeira')
     owners_name: object = models.CharField(
         max_length=64,
-        verbose_name='Nome do Contratante (como no cartão)'
+        verbose_name='Nome do Titular (como no cartão)'
     )
     note: object = models.TextField(
         max_length=128,

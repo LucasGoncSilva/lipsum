@@ -1,42 +1,83 @@
-services_choices = [
+banks: list[str] = [
+    ('banco_do_brasil', 'Banco do Brasil'),
+    ('original', 'Banco Original'),
+    ('bradesco', 'Bradesco'),
+    ('caixa', 'Caixa'),
+    ('itau', 'Itaú'),
+    ('next', 'Next'),
+    ('nubank', 'Nubank'),
+    ('pao_de_acucar', 'Pão de Açúcar'),
+    ('pagseguro', 'PagSeguro'),
+    ('paypal', 'PayPal'),
+    ('santander', 'Santander'),
+    ('ticket', 'Ticket'),
+]
+
+brands: list[str] = [
+    ('american_express', 'American Express'),
+    ('diners_club_international', 'Diners Club International'),
+    ('elo', 'Elo'),
+    ('hipercard', 'Hipercard'),
+    ('mastercard', 'Mastercard'),
+    ('visa', 'Visa'),    
+]
+
+cards_types: list[str] = [
+    ('Débito', 'Débito'),
+    ('Crédito', 'Crédito'),
+    ('Pré-pago', 'Pré-pago'),
+    ('Co-branded', 'Co-branded'),
+]
+
+
+services: list[str] = [
+    ('aws', 'AWS'),
     ('adobe', 'Adobe'),
     ('airbnb', 'Airbnb'),
     ('amazon', 'Amazon'),
+    ('prime_video', 'Amazon Prime Video'),
     ('american_express', 'American Express'),
     ('apple', 'Apple'),
-    ('prime_video', 'Amazon Prime Video'),
-    ('aws', 'AWS'),
     ('banco_do_brasil', 'Banco do Brasil'),
     ('booking', 'Booking'),
+    ('bradesco', 'Bradesco'),
     ('caixa', 'Caixa'),
     ('deezer', 'Deezer'),
+    ('diners_club_international', 'Diners Club International'),
     ('discord', 'Discord'),
     ('disney+', 'Disney'),
+    ('elo', 'Elo'),
     ('epic_games', 'Epic Games'),
     ('facebook', 'Facebook'),
     ('github', 'Github'),
     ('google', 'Google'),
     ('gov_br', 'Gov BR'),
     ('heroku', 'Heroku'),
+    ('hipercard', 'Hipercard'),
     ('instagram', 'Instagram'),
+    ('itau', 'Itaú'),
     ('kayak', 'Kayak'),
     ('linkedin', 'LinkedIn'),
     ('magalu', 'Magazine Luiza'),
     ('mastercard', 'Mastercard'),
     ('mercado_livre', 'Mercado Livre'),
     ('netflix', 'Netflix'),
+    ('next', 'Next'),
     ('notion', 'Notion'),
-    ('nubank', 'Nubank'),
     ('nu_invest', 'Nu Invest'),
+    ('nubank', 'Nubank'),
     ('outlook', 'Outlook'),
+    ('paypal', 'PayPal'),
     ('paypal', 'Paypal'),
     ('pinterest', 'Pinterest'),
+    ('pao_de_acucar', 'Pão de Açúcar'),
     ('reddit', 'Reddit'),
     ('santander', 'Santander'),
     ('spotify', 'Spotify'),
     ('steam', 'Steam'),
     ('stripe', 'Stripe'),
     ('submarino', 'Submarino'),
+    ('ticket', 'Ticket'),
     ('trello', 'Trello'),
     ('trip_advisor', 'Trip Advisor'),
     ('twitch', 'Twitch'),
@@ -45,12 +86,9 @@ services_choices = [
     ('visa', 'Visa'),
     ('wordpress', 'Wordpress'),
     ('yahoo', 'Yahoo'),
-]
+] + banks + brands
 
 
-cards_choices = [
-    ('Débito', 'Débito'),
-    ('Crédito', 'Crédito'),
-    ('Pré-pago', 'Pré-pago'),
-    ('Co-branded', 'Co-branded'),
-]
+cards_banks = sorted(set(banks), key=lambda x: x[1])
+cards_brands = sorted(set(brands), key=lambda x: x[1])
+credentials_services = sorted(set(services), key=lambda x: x[1])
