@@ -19,7 +19,7 @@ class LoginCredential(models.Model):
         max_length=40,
         verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
     )
-    slug: object = models.SlugField()
+    slug: object = models.SlugField(max_length=128)
     thirdy_party_login: object = models.BooleanField(verbose_name='Login com serviço de terceiro?')
     thirdy_party_login_name: object = models.CharField(
         max_length=40,
@@ -40,7 +40,7 @@ class LoginCredential(models.Model):
         return f'{str(self.owner.first_name)} | {self.service} | {self.name}'
 
     def get_absolute_url(self) -> str:
-        return reverse('secret:credential_detail_view', args=(str(self.slug)))
+        return str(self.slug)
 
     class Meta:
         ordering = ['-created']
