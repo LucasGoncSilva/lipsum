@@ -10,7 +10,8 @@ urlpatterns = [
     # Credentials views
     path('credentials/', v.credential_list_view, name='credential_list_view'),
     path('credentials/new', v.CredentialCreateView.as_view(), name='credential_create_view'),
-    path('credentials/<int:pk>', v.CredentialDetailView.as_view(), name='credential_detail_view'),
+    # path('credentials/<slug:slug>', v.CredentialDetailView.as_view(), name='credential_detail_view'),
+    path('credentials/<slug:slug>', v.credential_detail_view, name='credential_detail_view'),
     path('credentials/<int:pk>/edit', v.CredentialUpdateView.as_view(), name='credential_update_view'),
     path('credentials/<int:pk>/delete', v.CredentialDeleteView.as_view(), name='credential_delete_view'),
     # Cards views

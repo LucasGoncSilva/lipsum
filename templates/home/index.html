@@ -20,7 +20,7 @@
             <legend>Credenciais recém-adicionadas</legend>
 
             {% for i in credentials %}
-            <a href="{% url 'secret:credential_detail_view' i.pk %}">
+            <a href="{% url 'secret:credential_detail_view' i.slug %}">
                 <div class="px-4">
                     <img class="my-1" src="/static/secret/img/Credential/{{ i.service }}.svg">
                     <h5>{{ i.name }}</h5>

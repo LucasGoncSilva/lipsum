@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -18,9 +19,15 @@ def credential_list_view(request) -> object:
     })
 
 
-class CredentialDetailView(DetailView):
-    model = LoginCredential
-    template_name = 'secret/Credential/detail_view.html'
+def credential_detail_view(request: object, slug: str) -> object:
+    try:
+        credential: object = LoginCredential.objects.get(owner=request.user, slug=slug)
+    except:
+        raise Http404('The QuerySet for get method returned a number different of one object')
+
+    return render(request, 'secret/Credential/detail_view.html', {
+        'object': credential
+    })
 
 
 class CredentialCreateView(CreateView):

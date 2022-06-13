@@ -68,7 +68,6 @@ services: list[str] = [
     ('nubank', 'Nubank'),
     ('outlook', 'Outlook'),
     ('paypal', 'PayPal'),
-    ('paypal', 'Paypal'),
     ('pinterest', 'Pinterest'),
     ('pao_de_acucar', 'Pão de Açúcar'),
     ('reddit', 'Reddit'),
