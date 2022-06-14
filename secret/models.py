@@ -1,6 +1,6 @@
 from .month.models import MonthField
 from django.db import models
-from django.urls import reverse
+# from django.urls import reverse
 
 from accounts.models import User
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
@@ -67,6 +67,7 @@ class Card(models.Model):
     cvv: object = models.CharField(max_length=4, verbose_name='cvv')
     bank: object = models.CharField(max_length=64, choices=cards_banks,verbose_name='Banco')
     brand: object = models.CharField(max_length=64, choices=cards_brands,verbose_name='Bandeira')
+    slug: object = models.SlugField(max_length=128, null=True)
     owners_name: object = models.CharField(
         max_length=64,
         verbose_name='Nome do Titular (como no cartão)'
@@ -84,7 +85,7 @@ class Card(models.Model):
         return f'{str(self.owner.first_name)} | {self.model} | {self.name}'
 
     def get_absolute_url(self) -> str:
-        return reverse('secret:card_detail_view', args=(str(self.id)))
+        return str(self.slug)
 
     class Meta:
         ordering = ['-created']
@@ -98,6 +99,7 @@ class SecurityNote(models.Model):
         verbose_name='Dono'
     )
     title: object = models.CharField(max_length=40, verbose_name='Título')
+    slug: object = models.SlugField(max_length=128, null=True)
     content: object = models.TextField(max_length=600, verbose_name='Conteúdo')
     created: object = models.DateTimeField(auto_now_add=True)
     updated: object = models.DateTimeField(auto_now=True)
@@ -106,7 +108,7 @@ class SecurityNote(models.Model):
         return f'{str(self.owner.first_name)} | {self.title}'
 
     def get_absolute_url(self) -> str:
-        return reverse('secret:note_detail_view', args=(str(self.id)))
+        return str(self.slug)
 
     class Meta:
         ordering = ['-created']

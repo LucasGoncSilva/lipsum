@@ -4,10 +4,16 @@ from .models import Card, LoginCredential, SecurityNote
 
 
 # Register your models here.
-admin.site.register(Card)
-admin.site.register(SecurityNote)
+@admin.register(Card)
+class Admin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('bank', 'name')}
 
 
 @admin.register(LoginCredential)
 class LoginCredentialAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('service', 'name')}
+
+
+@admin.register(SecurityNote)
+class Admin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}

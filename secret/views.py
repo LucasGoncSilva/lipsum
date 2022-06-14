@@ -73,9 +73,15 @@ def card_list_view(request) -> object:
     })
 
 
-class CardDetailView(DetailView):
-    model = Card
-    template_name = 'secret/Card/detail_view.html'
+def card_detail_view(request: object, slug: str) -> object:
+    try:
+        card: object = Card.objects.get(owner=request.user, slug=slug)
+    except:
+        raise Http404('The QuerySet for get method returned a number different of one object')
+
+    return render(request, 'secret/Card/detail_view.html', {
+        'object': card
+    })
 
 
 class CardCreateView(CreateView):
@@ -121,9 +127,15 @@ def note_list_view(request) -> object:
     })
 
 
-class NoteDetailView(DetailView):
-    model = SecurityNote
-    template_name = 'secret/Note/detail_view.html'
+def note_detail_view(request: object, slug: str) -> object:
+    try:
+        note: object = SecurityNote.objects.get(owner=request.user, slug=slug)
+    except:
+        raise Http404('The QuerySet for get method returned a number different of one object')
+
+    return render(request, 'secret/Note/detail_view.html', {
+        'object': note
+    })
 
 
 class NoteCreateView(CreateView):
