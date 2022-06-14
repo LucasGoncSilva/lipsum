@@ -59,6 +59,10 @@ hr:not(header hr) {
             color: $main-color;
             background: $accent-color;
         }
+
+        .info {
+            border: none
+        }
     }
 }
 

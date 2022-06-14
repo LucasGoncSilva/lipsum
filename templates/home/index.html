@@ -38,14 +38,14 @@
                 <h5>Total: {{ credentials.count }} credenciais de login</h5>
             </div>
 
-            <a href="#">
+            <a href="{% url 'secret:credential_list_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/credential.png' %}">
                     <h5>Visualizar todas</h5>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="{% url 'secret:credential_create_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/plus.png' %}">
                     <h5>Adicionar</h5>
@@ -85,14 +85,14 @@
                 <h5>Total: {{ cards.count }} cartões</h5>
             </div>
 
-            <a href="#">
+            <a href="{% url 'secret:card_list_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/card.png' %}">
                     <h5>Visualizar todos</h5>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="{% url 'secret:card_create_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/plus.png' %}">
                     <h5>Adicionar</h5>
@@ -132,14 +132,14 @@
                 <h5>Total: {{ notes.count }} anotações</h5>
             </div>
 
-            <a href="#">
+            <a href="{% url 'secret:note_list_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/folder.png' %}">
                     <h5>Visualizar todas</h5>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="{% url 'secret:note_create_view' %}">
                 <div class="px-4 action">
                     <img class="my-1" src="{% static 'home/index/img/plus.png' %}">
                     <h5>Adicionar</h5>
