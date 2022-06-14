@@ -1,6 +1,5 @@
 from .month.models import MonthField
 from django.db import models
-# from django.urls import reverse
 
 from accounts.models import User
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
@@ -14,7 +13,11 @@ class LoginCredential(models.Model):
         related_name='credentials',
         verbose_name='Dono'
     )
-    service: object = models.CharField(max_length=64, choices=credentials_services, verbose_name='Serviço')
+    service: object = models.CharField(
+        max_length=64,
+        choices=credentials_services,
+        verbose_name='Serviço'
+    )
     name: object = models.CharField(
         max_length=40,
         verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
@@ -65,8 +68,16 @@ class Card(models.Model):
     number: object = models.CharField(max_length=19, verbose_name='Número do Cartão')
     expiration: object = MonthField(verbose_name='Data de Expiração')
     cvv: object = models.CharField(max_length=4, verbose_name='cvv')
-    bank: object = models.CharField(max_length=64, choices=cards_banks,verbose_name='Banco')
-    brand: object = models.CharField(max_length=64, choices=cards_brands,verbose_name='Bandeira')
+    bank: object = models.CharField(
+        max_length=64,
+        choices=cards_banks,
+        verbose_name='Banco'
+    )
+    brand: object = models.CharField(
+        max_length=64,
+        choices=cards_brands,
+        verbose_name='Bandeira'
+    )
     slug: object = models.SlugField(max_length=128, null=True)
     owners_name: object = models.CharField(
         max_length=64,
