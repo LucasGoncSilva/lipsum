@@ -14,7 +14,7 @@
 <h1 class="text-center">Informações Gerais</h1>
 
 <section class="mt-5 mx-auto px-5 pt-3 pb-5">
-    <h2 class="text-center mb-5">Credenciais de login</h2>
+    <h2 class="text-center mb-5">Credenciais</h2>
     <div class="grid">
         <fieldset id="credentials" class="px-4 py-4">
             <legend>Credenciais recém-adicionadas</legend>
@@ -35,7 +35,7 @@
         <div class="px-4 py-4">
             <div class="px-4 info">
                 <img class="my-1" src="{% static 'home/index/img/calculator.png' %}">
-                <h5>Total: {{ credentials.count }} credenciais de login</h5>
+                <h5>Total: {{ credentials.count }} credenciais</h5>
             </div>
 
             <a href="{% url 'secret:credential_list_view' %}">
