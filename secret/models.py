@@ -1,7 +1,8 @@
-from .month.models import MonthField
+from django.template.defaultfilters import slugify
 from django.db import models
 
 from accounts.models import User
+from .month.models import MonthField
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
 
 
@@ -44,6 +45,43 @@ class LoginCredential(models.Model):
 
     def get_absolute_url(self) -> str:
         return str(self.slug)
+
+    def all_fields_presence(self) -> bool:
+        if self.owner and self.service and self.name \
+            and self.slug == f'{self.service}-{slugify(self.name)}' \
+                and self.thirdy_party_login_name and self.login and self.password:
+                if (self.thirdy_party_login == True and self.thirdy_party_login_name != '-----') \
+                    or (self.thirdy_party_login != True and self.login != '-----' and self.password != '-----'):
+                    return True
+        return False
+
+    def all_fields_of_correct_types(self) -> bool:
+        if [
+            str(type(self.owner)),
+            type(self.service),
+            type(self.name),
+            type(self.slug),
+            type(self.thirdy_party_login),
+            type(self.thirdy_party_login_name),
+            type(self.login),
+            type(self.password),
+        ] == [
+            "<class 'accounts.models.User'>",
+            str,
+            str,
+            str,
+            bool,
+            str,
+            str,
+            str,
+        ]:
+            return True
+        return False
+
+    def is_valid(self) -> bool:
+        if self.all_fields_presence() and self. all_fields_of_correct_types():
+            return True
+        return False
 
     class Meta:
         ordering = ['-created']
