@@ -211,7 +211,7 @@ class CardTestCase(TestCase):
             brand='mastercard-',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
-        )
+        )  # Correct object
 
         Card.objects.create(
             owner=test_user,

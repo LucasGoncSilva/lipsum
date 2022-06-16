@@ -49,6 +49,11 @@ class LoginCredential(models.Model):
     def expected_length(self, var: str) -> int:
         expected_length = {
             'service': 64,
+            'name': 40,
+            'slug': 128,
+            'thirdy_party_login_name': 40,
+            'login': 200,
+            'password': 200,
         }
 
         return expected_length[var]
@@ -65,6 +70,11 @@ class LoginCredential(models.Model):
     def all_fields_of_right_length(self) -> bool:
         vars = [
             'service',
+            'name',
+            'slug',
+            'thirdy_party_login_name',
+            'login',
+            'password',
         ]
 
         if all(map(self.check_field_length, vars)):
