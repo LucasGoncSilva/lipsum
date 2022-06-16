@@ -82,12 +82,13 @@ class LoginCredential(models.Model):
         return True
 
     def all_fields_present(self) -> bool:
-        if self.owner and self.service and self.name \
-            and self.slug == f'{self.service}-{slugify(self.name)}' \
-                and self.thirdy_party_login_name and self.login and self.password:
-                if (self.thirdy_party_login == True and self.thirdy_party_login_name != '-----') \
+        if self.owner and self.name \
+            and self.service in [slug for slug, _ in credentials_services] \
+                and self.slug == f'{self.service}-{slugify(self.name)}' \
+                    and self.thirdy_party_login_name and self.login and self.password:
+            if (self.thirdy_party_login == True and self.thirdy_party_login_name != '-----') \
                     or (self.thirdy_party_login != True and self.login != '-----' and self.password != '-----'):
-                    return True
+                return True
         return False
 
     def all_fields_of_correct_types(self) -> bool:
@@ -171,6 +172,94 @@ class Card(models.Model):
 
     def get_absolute_url(self) -> str:
         return str(self.slug)
+
+    def expected_length(self, var: str) -> int:
+        expected_length = {
+            'name': 40,
+            'card_type': 16,
+            'number': 19,
+            'expiration': 19,
+            'cvv': 4,
+            'bank': 64,
+            'brand': 64,
+            'slug': 128,
+            'owners_name': 64,
+            'note': 128
+        }
+
+        return expected_length[var]
+
+
+    def check_field_length(self, var: str) -> bool:
+        value = self.__getattribute__(var)
+
+        if len(value) <= self.expected_length(var):
+            return True
+        return False
+
+
+    def all_fields_of_right_length(self) -> bool:
+        vars = [
+            'name',
+            'card_type',
+            'number',
+            'expiration',
+            'cvv',
+            'bank',
+            'brand',
+            'slug',
+            'owners_name',
+            'note',
+        ]
+
+        if all(map(self.check_field_length, vars)):
+            return True
+        return True
+
+    def all_fields_present(self) -> bool:
+        if self.owner and self.name and self.card_type \
+            and self.number and self.expiration and self.cvv \
+                and self.bank in [slug for slug, _ in cards_banks] \
+                    and self.brand in [slug for slug, _ in cards_brands] \
+                        and self.owners_name \
+                            and self.slug == f'{self.bank}-{self.name}':
+            return True
+        return False
+
+    def all_fields_of_correct_types(self) -> bool:
+        if [
+            str(type(self.owner)),
+            type(self.name),
+            type(self.card_type),
+            type(self.number),
+            str(type(self.expiration)),
+            type(self.cvv),
+            type(self.bank),
+            type(self.brand),
+            type(self.slug),
+            type(self.owners_name),
+            type(self.note),
+        ] == [
+            "<class 'accounts.models.User'>",
+            str,
+            str,
+            str,
+            "<class 'secret.month.Month'>",
+            str,
+            str,
+            str,
+            str,
+            str,
+            str,
+        ]:
+            return True
+        return False
+
+    def is_valid(self) -> bool:
+        if self.all_fields_present() and self.all_fields_of_correct_types() \
+            and self.all_fields_of_right_length():
+            return True
+        return False
 
     class Meta:
         ordering = ['-created']

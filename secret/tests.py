@@ -71,6 +71,28 @@ class CredentialTestCase(TestCase):
             # Missing/empty password
         )
 
+        LoginCredential.objects.create(
+            owner=test_user,
+            service='google-',
+            name='Salve'*9,  # More chars than the limit
+            slug='google--personal-main-account',
+            thirdy_party_login=False,
+            thirdy_party_login_name='-----',
+            login='x'*201,  # More chars than the limit
+            password='ilovemenotyou',
+        )
+
+        LoginCredential.objects.create(
+            owner=test_user,
+            service='pampas-gonden-radio-',  # Inexistent service
+            name='Little Fries',
+            slug='pampas-gonden-radio--little-fries',
+            thirdy_party_login=True,
+            thirdy_party_login_name='Personal Main Account',
+            login='-----',
+            password='-----',
+        )
+
     def test_credential_instance_validity(self):
         """Tests if setUp's credentials are correctly instancied"""
 
@@ -79,12 +101,16 @@ class CredentialTestCase(TestCase):
         cred3 = LoginCredential.objects.get(pk=3)
         cred4 = LoginCredential.objects.get(pk=4)
         cred5 = LoginCredential.objects.get(pk=5)
+        cred6 = LoginCredential.objects.get(pk=6)
+        cred7 = LoginCredential.objects.get(pk=7)
 
         self.assertIsInstance(cred1, LoginCredential)
         self.assertIsInstance(cred2, LoginCredential)
         self.assertIsInstance(cred3, LoginCredential)
         self.assertIsInstance(cred4, LoginCredential)
         self.assertIsInstance(cred5, LoginCredential)
+        self.assertIsInstance(cred6, LoginCredential)
+        self.assertIsInstance(cred7, LoginCredential)
 
     def test_credential_key_value_assertion(self):
         """Tests if keys and values are properly assigned"""
@@ -121,14 +147,18 @@ class CredentialTestCase(TestCase):
         cred3 = LoginCredential.objects.get(pk=3)
         cred4 = LoginCredential.objects.get(pk=4)
         cred5 = LoginCredential.objects.get(pk=5)
+        cred6 = LoginCredential.objects.get(pk=6)
+        cred7 = LoginCredential.objects.get(pk=7)
 
-        self.assertEqual(LoginCredential.objects.all().count(), 5)
+        self.assertEqual(LoginCredential.objects.all().count(), 7)
 
         self.assertTrue(cred1.is_valid())
         self.assertTrue(cred2.is_valid())
         self.assertFalse(cred3.is_valid())
         self.assertFalse(cred4.is_valid())
         self.assertFalse(cred5.is_valid())
+        self.assertFalse(cred6.is_valid())
+        self.assertFalse(cred7.is_valid())
 
     def test_credential_update_validity(self):
         """Tests if updated credentials are valid or not"""
@@ -138,6 +168,8 @@ class CredentialTestCase(TestCase):
         cred3 = LoginCredential.objects.get(pk=3)
         cred4 = LoginCredential.objects.get(pk=4)
         cred5 = LoginCredential.objects.get(pk=5)
+        cred6 = LoginCredential.objects.get(pk=6)
+        cred7 = LoginCredential.objects.get(pk=7)
 
         cred1.service = ''
         cred2.slug = 'diners-club-international--tupinamba'
@@ -145,18 +177,26 @@ class CredentialTestCase(TestCase):
         cred4.slug = 'steam--little-fries'
         cred4.login = 'some_login_text_or_email_or_some_other_stuff_like_this'
         cred5.password = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        cred6.name = 'Personal Main Account'
+        cred6.login = 'bananinha_assada_3_2_1'
+        cred7.service = 'visa-'
+        cred7.slug = 'visa--little-fries'
 
         cred1.save()
         cred2.save()
         cred3.save()
         cred4.save()
         cred5.save()
+        cred6.save()
+        cred7.save()
 
         self.assertFalse(cred1.is_valid())
         self.assertFalse(cred2.is_valid())
         self.assertTrue(cred3.is_valid())
         self.assertTrue(cred4.is_valid())
         self.assertTrue(cred5.is_valid())
+        self.assertTrue(cred6.is_valid())
+        self.assertTrue(cred7.is_valid())
 
     def test_credential_delete_validity(self):
         """Tests if objects are correctly deleted or not"""
@@ -166,10 +206,14 @@ class CredentialTestCase(TestCase):
         cred3 = LoginCredential.objects.get(pk=3)
         cred4 = LoginCredential.objects.get(pk=4)
         cred5 = LoginCredential.objects.get(pk=5)
+        cred6 = LoginCredential.objects.get(pk=6)
+        cred7 = LoginCredential.objects.get(pk=7)
         
         cred3.delete()
         cred4.delete()
         cred5.delete()
+        cred6.delete()
+        cred7.delete()
 
         self.assertEqual(LoginCredential.objects.all().count(), 2)
 
@@ -203,7 +247,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='Débito',  # Wrong type
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -211,7 +255,7 @@ class CardTestCase(TestCase):
             brand='mastercard-',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
-        )  # Correct object
+        )
 
         Card.objects.create(
             owner=test_user,
