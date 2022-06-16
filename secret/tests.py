@@ -175,3 +175,66 @@ class CredentialTestCase(TestCase):
 
         self.assertTrue(cred1.is_valid())
         self.assertTrue(cred2.is_valid())
+
+
+class CardTestCase(TestCase):
+    def test_stuff(self):
+        test_user = User.objects.create(
+            username='test_user',
+            password='testing_password',
+            email='test@email.com',
+            first_name='Test',
+            last_name='User'
+        )
+
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration=Month(2028, 11),
+            cvv=113,
+            bank='nubank-',
+            brand='mastercard-',
+            slug='nubank--personal-main-card',
+            owners_name='TEST USER',
+        )  # Correct object
+
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration=Month(2028, 11),
+            cvv=113,
+            bank='nubank-',
+            brand='mastercard-',
+            slug='nubank--personal-main-card',
+            owners_name='TEST USER',
+        )
+
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration=Month(2028, 11),
+            cvv=113,
+            bank='nubank-',
+            brand='mastercard-',
+            slug='nubank--personal-main-card',
+            owners_name='TEST USER',
+        )  # Correct object
+
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration=Month(2028, 11),
+            cvv=113,
+            bank='nubank-',
+            brand='mastercard-',
+            slug='nubank--personal-main-card',
+            owners_name='TEST USER',
+        )  # Correct object

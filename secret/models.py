@@ -46,7 +46,32 @@ class LoginCredential(models.Model):
     def get_absolute_url(self) -> str:
         return str(self.slug)
 
-    def all_fields_presence(self) -> bool:
+    def expected_length(self, var: str) -> int:
+        expected_length = {
+            'service': 64,
+        }
+
+        return expected_length[var]
+
+
+    def check_field_length(self, var: str) -> bool:
+        value = self.__getattribute__(var)
+
+        if len(value) <= self.expected_length(var):
+            return True
+        return False
+
+
+    def all_fields_of_right_length(self) -> bool:
+        vars = [
+            'service',
+        ]
+
+        if all(map(self.check_field_length, vars)):
+            return True
+        return True
+
+    def all_fields_present(self) -> bool:
         if self.owner and self.service and self.name \
             and self.slug == f'{self.service}-{slugify(self.name)}' \
                 and self.thirdy_party_login_name and self.login and self.password:
@@ -79,7 +104,8 @@ class LoginCredential(models.Model):
         return False
 
     def is_valid(self) -> bool:
-        if self.all_fields_presence() and self. all_fields_of_correct_types():
+        if self.all_fields_present() and self.all_fields_of_correct_types() \
+            and self.all_fields_of_right_length():
             return True
         return False
 
