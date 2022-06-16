@@ -1,5 +1,6 @@
-from django.template.defaultfilters import slugify
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.core.validators import MinLengthValidator
 
 from accounts.models import User
 from .month.models import MonthField
@@ -83,11 +84,11 @@ class LoginCredential(models.Model):
 
     def all_fields_present(self) -> bool:
         if self.owner and self.name \
-            and self.service in [slug for slug, _ in credentials_services] \
-                and self.slug == f'{self.service}-{slugify(self.name)}' \
-                    and self.thirdy_party_login_name and self.login and self.password:
+        and self.service in [slug for slug, _ in credentials_services] \
+        and self.slug == f'{self.service}-{slugify(self.name)}' \
+        and self.thirdy_party_login_name and self.login and self.password:
             if (self.thirdy_party_login == True and self.thirdy_party_login_name != '-----') \
-                    or (self.thirdy_party_login != True and self.login != '-----' and self.password != '-----'):
+            or (self.thirdy_party_login != True and self.login != '-----' and self.password != '-----'):
                 return True
         return False
 
@@ -140,7 +141,11 @@ class Card(models.Model):
         choices=cards_types,
         verbose_name='Tipo (débito, crédito, ...)'
     )
-    number: object = models.CharField(max_length=19, verbose_name='Número do Cartão')
+    number: object = models.CharField(
+        max_length=19,
+        validators=[MinLengthValidator(12)],
+        verbose_name='Número do Cartão'
+    )
     expiration: object = MonthField(verbose_name='Data de Expiração')
     cvv: object = models.CharField(max_length=4, verbose_name='cvv')
     bank: object = models.CharField(
@@ -217,12 +222,13 @@ class Card(models.Model):
         return True
 
     def all_fields_present(self) -> bool:
-        if self.owner and self.name and self.card_type \
-            and self.number and self.expiration and self.cvv \
-                and self.bank in [slug for slug, _ in cards_banks] \
-                    and self.brand in [slug for slug, _ in cards_brands] \
-                        and self.owners_name \
-                            and self.slug == f'{self.bank}-{self.name}':
+        if self.owner and self.name \
+        and self.card_type in [slug for slug, _ in cards_types] \
+        and self.number and self.expiration and self.cvv \
+        and self.bank in [slug for slug, _ in cards_banks] \
+        and self.brand in [slug for slug, _ in cards_brands] \
+        and self.owners_name \
+        and self.slug == f'{self.bank}-{self.name}':
             return True
         return False
 

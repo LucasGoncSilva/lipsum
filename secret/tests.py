@@ -247,7 +247,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',  # Wrong type
+            card_type='Crediário',  # Wrong type
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -261,14 +261,27 @@ class CardTestCase(TestCase):
             owner=test_user,
             name='Personal Main Card',
             card_type='Débito',
-            number='4002892240028922',
+            number='123456789',  # Length out of range
             expiration=Month(2028, 11),
-            cvv=113,
+            cvv=12345,  # Length out of range
             bank='nubank-',
             brand='mastercard-',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
-        )  # Correct object
+        )
+
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration=Month(2028, 11),
+            cvv=113,
+            bank='mingau-',  # Inexistent service
+            brand='mastercard-',
+            slug='mingau--personal-main-card',
+            owners_name='TEST USER',
+        )
 
         Card.objects.create(
             owner=test_user,
@@ -279,6 +292,6 @@ class CardTestCase(TestCase):
             cvv=113,
             bank='nubank-',
             brand='mastercard-',
-            slug='nubank--personal-main-card',
+            slug='nubank--minotauro',  # Should be 'nubank--personal-main-card'
             owners_name='TEST USER',
-        )  # Correct object
+        )
