@@ -113,7 +113,7 @@ class CredentialTestCase(TestCase):
         self.assertIsInstance(cred7, LoginCredential)
 
     def test_credential_key_value_assertion(self):
-        """Tests if keys and values are properly assigned"""
+        """Tests if credential's keys and values are properly assigned"""
 
         cred1 = LoginCredential.objects.get(pk=1)
 
@@ -199,7 +199,7 @@ class CredentialTestCase(TestCase):
         self.assertTrue(cred7.is_valid())
 
     def test_credential_delete_validity(self):
-        """Tests if objects are correctly deleted or not"""
+        """Tests if credential objects are correctly deleted or not"""
 
         cred1 = LoginCredential.objects.get(pk=1)
         cred2 = LoginCredential.objects.get(pk=2)
@@ -222,7 +222,7 @@ class CredentialTestCase(TestCase):
 
 
 class CardTestCase(TestCase):
-    def test_stuff(self):
+    def setUp(self):
         test_user = User.objects.create(
             username='test_user',
             password='testing_password',
@@ -231,23 +231,25 @@ class CardTestCase(TestCase):
             last_name='User'
         )
 
+        # Object 1
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
             card_type='Débito',
             number='4002892240028922',
             expiration=Month(2028, 11),
-            cvv=113,
+            cvv='113',
             bank='nubank-',
             brand='mastercard-',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )  # Correct object
 
+        # Object 2
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Crediário',  # Wrong type
+            card_type='Crediário',  # Inexintent type
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -257,19 +259,21 @@ class CardTestCase(TestCase):
             owners_name='TEST USER',
         )
 
+        # Object 3
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
             card_type='Débito',
             number='123456789',  # Length out of range
             expiration=Month(2028, 11),
-            cvv=12345,  # Length out of range
+            cvv=12,  # Length out of range
             bank='nubank-',
             brand='mastercard-',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )
 
+        # Object 4
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
@@ -277,12 +281,13 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
-            bank='mingau-',  # Inexistent service
+            bank='mingau-',  # Inexistent bank
             brand='mastercard-',
             slug='mingau--personal-main-card',
             owners_name='TEST USER',
         )
 
+        # Object 5
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
@@ -295,3 +300,120 @@ class CardTestCase(TestCase):
             slug='nubank--minotauro',  # Should be 'nubank--personal-main-card'
             owners_name='TEST USER',
         )
+
+        # Object 6
+        Card.objects.create(
+            owner=test_user,
+            name='Personal Main Card',
+            card_type='Débito',
+            number='4002892240028922',
+            expiration='2023/4',
+            cvv=113,
+            bank='nubank-',
+            brand='vina-',  # Inexistent brand
+            slug='nubank--personal-main-card',
+            owners_name='TEST USER',
+        )
+
+    def test_card_instance_validity(self):
+        """Tests if setUp's cards are correctly instancied"""
+
+        card1 = Card.objects.get(pk=1)
+        card2 = Card.objects.get(pk=2)
+        card3 = Card.objects.get(pk=3)
+        card4 = Card.objects.get(pk=4)
+        card5 = Card.objects.get(pk=5)
+        card6 = Card.objects.get(pk=6)
+
+        self.assertIsInstance(card1, Card)
+        self.assertIsInstance(card2, Card)
+        self.assertIsInstance(card3, Card)
+        self.assertIsInstance(card4, Card)
+        self.assertIsInstance(card5, Card)
+        self.assertIsInstance(card6, Card)
+
+    def test_card_key_value_assertion(self):
+        """Tests if card's keys and values are properly assigned"""
+
+        card1 = Card.objects.get(pk=1)
+
+        self.assertEqual(card1.name, 'Personal Main Card')
+        self.assertEqual(card1.card_type, 'Débito')
+        self.assertEqual(card1.number, '4002892240028922')
+        self.assertEqual(card1.expiration, Month(2028, 11))
+        self.assertEqual(card1.cvv, '113')
+        self.assertEqual(card1.bank, 'nubank-')
+        self.assertEqual(card1.brand, 'mastercard-')
+        self.assertEqual(card1.slug, 'nubank--personal-main-card')
+        self.assertEqual(card1.owners_name, 'TEST USER')
+
+    def test_card_user_foreign_key_validity(self):
+        """Tests card.owner is properly assigned"""
+
+        card1 = Card.objects.get(pk=1)
+        user = User.objects.get(pk=1)
+
+        self.assertEqual(card1.owner, user)
+
+    def test_card_create_validity(self):
+        """Tests if created cards are valid or not"""
+
+        card1 = Card.objects.get(pk=1)
+        card2 = Card.objects.get(pk=2)
+        card3 = Card.objects.get(pk=3)
+        card4 = Card.objects.get(pk=4)
+        card5 = Card.objects.get(pk=5)
+        card6 = Card.objects.get(pk=6)
+
+        self.assertEqual(Card.objects.all().count(), 6)
+
+        self.assertTrue(card1.is_valid())
+        self.assertFalse(card2.is_valid())
+        self.assertFalse(card3.is_valid())
+        self.assertFalse(card4.is_valid())
+        self.assertFalse(card5.is_valid())
+        self.assertFalse(card6.is_valid())
+
+    def test_card_update_validity(self):
+        """Tests if updated cards are valid or not"""
+
+        Card.objects.filter(pk=1).update(cvv='14000605')
+        Card.objects.filter(pk=2).update(card_type='Débito')
+        Card.objects.filter(pk=3).update(number='1122334455667788', cvv='1986')
+        Card.objects.filter(pk=4).update(bank='pagseguro-', slug='pagseguro--personal-main-card')
+        Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
+        Card.objects.filter(pk=6).update(brand='mastercard-')
+
+        card1 = Card.objects.get(pk=1)
+        card2 = Card.objects.get(pk=2)
+        card3 = Card.objects.get(pk=3)
+        card4 = Card.objects.get(pk=4)
+        card5 = Card.objects.get(pk=5)
+        card6 = Card.objects.get(pk=6)
+
+        self.assertFalse(card1.is_valid())
+        self.assertTrue(card2.is_valid())
+        self.assertTrue(card3.is_valid())
+        self.assertTrue(card4.is_valid())
+        self.assertTrue(card5.is_valid())
+        self.assertTrue(card6.is_valid())
+
+    def test_card_delete_validity(self):
+        """Tests if card objects are correctly deleted or not"""
+
+        card1 = Card.objects.get(pk=1)
+        card2 = Card.objects.get(pk=2)
+        card3 = Card.objects.get(pk=3)
+        card4 = Card.objects.get(pk=4)
+        card5 = Card.objects.get(pk=5)
+        card6 = Card.objects.get(pk=6)
+        
+        card2.delete()
+        card3.delete()
+        card4.delete()
+        card5.delete()
+        card6.delete()
+
+        self.assertEqual(Card.objects.all().count(), 1)
+
+        self.assertTrue(card1.is_valid())

@@ -45,7 +45,7 @@ services: list[str] = [
     ('deezer-', 'Deezer'),
     ('diners-club-international-', 'Diners Club International'),
     ('discord-', 'Discord'),
-    ('disney+-', 'Disney'),
+    ('disney+-', 'Disney+'),
     ('elo-', 'Elo'),
     ('epic-games-', 'Epic Games'),
     ('facebook-', 'Facebook'),

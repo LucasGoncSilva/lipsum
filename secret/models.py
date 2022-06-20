@@ -47,8 +47,8 @@ class LoginCredential(models.Model):
     def get_absolute_url(self) -> str:
         return str(self.slug)
 
-    def expected_length(self, var: str) -> int:
-        expected_length = {
+    def expected_max_length(self, var: str) -> int:
+        max_length = {
             'service': 64,
             'name': 40,
             'slug': 128,
@@ -57,15 +57,13 @@ class LoginCredential(models.Model):
             'password': 200,
         }
 
-        return expected_length[var]
+        return max_length[var]
 
 
     def check_field_length(self, var: str) -> bool:
         value = self.__getattribute__(var)
 
-        if len(value) <= self.expected_length(var):
-            return True
-        return False
+        return len(value) <= self.expected_max_length(var)
 
 
     def all_fields_of_right_length(self) -> bool:
@@ -78,9 +76,7 @@ class LoginCredential(models.Model):
             'password',
         ]
 
-        if all(map(self.check_field_length, vars)):
-            return True
-        return True
+        return all(map(self.check_field_length, vars))
 
     def all_fields_present(self) -> bool:
         if self.owner and self.name \
@@ -147,7 +143,11 @@ class Card(models.Model):
         verbose_name='Número do Cartão'
     )
     expiration: object = MonthField(verbose_name='Data de Expiração')
-    cvv: object = models.CharField(max_length=4, verbose_name='cvv')
+    cvv: object = models.CharField(
+        max_length=4,
+        validators=[MinLengthValidator(3)],
+        verbose_name='cvv'
+    )
     bank: object = models.CharField(
         max_length=64,
         choices=cards_banks,
@@ -158,7 +158,7 @@ class Card(models.Model):
         choices=cards_brands,
         verbose_name='Bandeira'
     )
-    slug: object = models.SlugField(max_length=128, null=True)
+    slug: object = models.SlugField(max_length=128)
     owners_name: object = models.CharField(
         max_length=64,
         verbose_name='Nome do Titular (como no cartão)'
@@ -178,12 +178,11 @@ class Card(models.Model):
     def get_absolute_url(self) -> str:
         return str(self.slug)
 
-    def expected_length(self, var: str) -> int:
-        expected_length = {
+    def expected_max_length(self, var: str) -> int:
+        max_length = {
             'name': 40,
             'card_type': 16,
             'number': 19,
-            'expiration': 19,
             'cvv': 4,
             'bank': 64,
             'brand': 64,
@@ -192,15 +191,26 @@ class Card(models.Model):
             'note': 128
         }
 
-        return expected_length[var]
+        return max_length[var]
+
+    def expected_min_length(self, var: str) -> int:
+        min_length = {
+            'number': 12,
+            'cvv': 3,
+        }
+
+        return min_length[var]
 
 
     def check_field_length(self, var: str) -> bool:
+        if var == 'expiration': return True
+
         value = self.__getattribute__(var)
 
-        if len(value) <= self.expected_length(var):
-            return True
-        return False
+        if var in ['number', 'cvv']:
+            return self.expected_min_length(var) <= len(value) <= self.expected_max_length(var)
+
+        return len(value) <= self.expected_max_length(var)
 
 
     def all_fields_of_right_length(self) -> bool:
@@ -214,23 +224,18 @@ class Card(models.Model):
             'brand',
             'slug',
             'owners_name',
-            'note',
         ]
 
-        if all(map(self.check_field_length, vars)):
-            return True
-        return True
+        return all(map(self.check_field_length, vars))
 
     def all_fields_present(self) -> bool:
-        if self.owner and self.name \
-        and self.card_type in [slug for slug, _ in cards_types] \
-        and self.number and self.expiration and self.cvv \
-        and self.bank in [slug for slug, _ in cards_banks] \
-        and self.brand in [slug for slug, _ in cards_brands] \
-        and self.owners_name \
-        and self.slug == f'{self.bank}-{self.name}':
-            return True
-        return False
+        return self.owner and self.name \
+            and self.card_type in [slug for slug, _ in cards_types] \
+                and self.number and self.expiration and self.cvv \
+                    and self.bank in [slug for slug, _ in cards_banks] \
+                        and self.brand in [slug for slug, _ in cards_brands] \
+                            and self.owners_name \
+                                and self.slug == f'{self.bank}-{slugify(self.name)}'
 
     def all_fields_of_correct_types(self) -> bool:
         if [
@@ -244,7 +249,6 @@ class Card(models.Model):
             type(self.brand),
             type(self.slug),
             type(self.owners_name),
-            type(self.note),
         ] == [
             "<class 'accounts.models.User'>",
             str,
@@ -256,14 +260,13 @@ class Card(models.Model):
             str,
             str,
             str,
-            str,
         ]:
             return True
         return False
 
     def is_valid(self) -> bool:
         if self.all_fields_present() and self.all_fields_of_correct_types() \
-            and self.all_fields_of_right_length():
+        and self.all_fields_of_right_length():
             return True
         return False
 
@@ -279,7 +282,7 @@ class SecurityNote(models.Model):
         verbose_name='Dono'
     )
     title: object = models.CharField(max_length=40, verbose_name='Título')
-    slug: object = models.SlugField(max_length=128, null=True)
+    slug: object = models.SlugField(max_length=128)
     content: object = models.TextField(max_length=600, verbose_name='Conteúdo')
     created: object = models.DateTimeField(auto_now_add=True)
     updated: object = models.DateTimeField(auto_now=True)
