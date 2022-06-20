@@ -163,6 +163,14 @@ class CredentialTestCase(TestCase):
     def test_credential_update_validity(self):
         """Tests if updated credentials are valid or not"""
 
+        LoginCredential.objects.filter(pk=1).update(service='')
+        LoginCredential.objects.filter(pk=2).update(slug='diners-club-international--tupinamba')
+        LoginCredential.objects.filter(pk=3).update(thirdy_party_login=False)
+        LoginCredential.objects.filter(pk=4).update(slug='steam--little-fries', login='some_login_text_or_email_or_some_other_stuff_like_this')
+        LoginCredential.objects.filter(pk=5).update(password='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+        LoginCredential.objects.filter(pk=6).update(name='Personal Main Account', login='bananinha_assada_3_2_1')
+        LoginCredential.objects.filter(pk=7).update(service='visa-', slug='visa--little-fries')
+
         cred1 = LoginCredential.objects.get(pk=1)
         cred2 = LoginCredential.objects.get(pk=2)
         cred3 = LoginCredential.objects.get(pk=3)
@@ -170,25 +178,6 @@ class CredentialTestCase(TestCase):
         cred5 = LoginCredential.objects.get(pk=5)
         cred6 = LoginCredential.objects.get(pk=6)
         cred7 = LoginCredential.objects.get(pk=7)
-
-        cred1.service = ''
-        cred2.slug = 'diners-club-international--tupinamba'
-        cred3.thirdy_party_login = False
-        cred4.slug = 'steam--little-fries'
-        cred4.login = 'some_login_text_or_email_or_some_other_stuff_like_this'
-        cred5.password = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        cred6.name = 'Personal Main Account'
-        cred6.login = 'bananinha_assada_3_2_1'
-        cred7.service = 'visa-'
-        cred7.slug = 'visa--little-fries'
-
-        cred1.save()
-        cred2.save()
-        cred3.save()
-        cred4.save()
-        cred5.save()
-        cred6.save()
-        cred7.save()
 
         self.assertFalse(cred1.is_valid())
         self.assertFalse(cred2.is_valid())
