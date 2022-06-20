@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from accounts.models import User
-from .models import Card, LoginCredential
+from .models import Card, LoginCredential, SecurityNote
 from .month.models import Month
 
 
@@ -16,6 +16,7 @@ class CredentialTestCase(TestCase):
             last_name='User'
         )
 
+        # Object 1
         LoginCredential.objects.create(
             owner=test_user,
             service='google-',
@@ -27,6 +28,7 @@ class CredentialTestCase(TestCase):
             password='ilovemenotyou',
         )  # Correct object
 
+        # Object 2
         LoginCredential.objects.create(
             owner=test_user,
             service='steam-',
@@ -38,6 +40,7 @@ class CredentialTestCase(TestCase):
             password='-----',
         )  # Correct object
 
+        # Object 3
         LoginCredential.objects.create(
             owner=test_user,
             service='steam-',
@@ -49,6 +52,7 @@ class CredentialTestCase(TestCase):
             password='ilovemenotyou',  # Should be '-----'
         )
 
+        # Object 4
         LoginCredential.objects.create(
             owner=test_user,
             service='steam-',
@@ -60,6 +64,7 @@ class CredentialTestCase(TestCase):
             password='night_monkey123',
         )
 
+        # Object 5
         LoginCredential.objects.create(
             owner=test_user,
             service='steam-',
@@ -68,9 +73,10 @@ class CredentialTestCase(TestCase):
             thirdy_party_login=False,
             thirdy_party_login_name='-----',
             login='night_monkey123',
-            # Missing/empty password
+            # Missing/empty password field
         )
 
+        # Object 6
         LoginCredential.objects.create(
             owner=test_user,
             service='google-',
@@ -82,6 +88,7 @@ class CredentialTestCase(TestCase):
             password='ilovemenotyou',
         )
 
+        # Object 7
         LoginCredential.objects.create(
             owner=test_user,
             service='pampas-gonden-radio-',  # Inexistent service
@@ -126,7 +133,7 @@ class CredentialTestCase(TestCase):
         self.assertEqual(cred1.password, 'ilovemenotyou')
 
     def test_credential_user_foreign_key_validity(self):
-        """Tests credential.owner is properly assigned"""
+        """Tests if credential.owner is properly assigned"""
 
         cred1 = LoginCredential.objects.get(pk=1)
         cred2 = LoginCredential.objects.get(pk=2)
@@ -337,7 +344,7 @@ class CardTestCase(TestCase):
         self.assertEqual(card1.owners_name, 'TEST USER')
 
     def test_card_user_foreign_key_validity(self):
-        """Tests card.owner is properly assigned"""
+        """Tests if card.owner is properly assigned"""
 
         card1 = Card.objects.get(pk=1)
         user = User.objects.get(pk=1)
@@ -406,3 +413,124 @@ class CardTestCase(TestCase):
         self.assertEqual(Card.objects.all().count(), 1)
 
         self.assertTrue(card1.is_valid())
+
+
+class SecurityNoteTestCase(TestCase):
+    def setUp(self):
+        test_user = User.objects.create(
+            username='test_user',
+            password='testing_password',
+            email='test@email.com',
+            first_name='Test',
+            last_name='User'
+        )
+
+        # Object 1
+        SecurityNote.objects.create(
+            owner=test_user,
+            title='How to draw an apple',
+            slug='how-to-draw-an-apple',
+            content='Just draw an apple tree and erase the tree.'
+        )  # Correct object
+
+        # Object 2
+        SecurityNote.objects.create(
+            owner=test_user,
+            title='How to draw a tree',
+            slug='howtodrawatree',  # Should be 'how-to-draw-a-tree'
+            content='Just draw an apple tree and erase the apples.'
+        )
+
+        # Object 3
+        SecurityNote.objects.create(
+            owner=test_user,
+            title='How to draw an apple tree',
+            slug='how-to-draw-an-apple-tree',
+            content='x'*333  # Length out of range
+        )
+
+        # Object 4
+        SecurityNote.objects.create(
+            owner=test_user,
+            title='How to draw an apple tree leaf',
+            slug='how-to-draw-an-apple-tree-leaf',
+        )  # Missing/empty content field
+
+    def test_note_instance_validity(self):
+        """Tests if setUp's notes are correctly instancied"""
+
+        note1 = SecurityNote.objects.get(pk=1)
+        note2 = SecurityNote.objects.get(pk=2)
+        note3 = SecurityNote.objects.get(pk=3)
+        note4 = SecurityNote.objects.get(pk=4)
+
+        self.assertIsInstance(note1, SecurityNote)
+        self.assertIsInstance(note2, SecurityNote)
+        self.assertIsInstance(note3, SecurityNote)
+        self.assertIsInstance(note4, SecurityNote)
+
+    def test_note_key_value_assertion(self):
+        """Tests if note's keys and values are properly assigned"""
+
+        note1 = SecurityNote.objects.get(pk=1)
+
+        self.assertEqual(note1.title, 'How to draw an apple')
+        self.assertEqual(note1.slug, 'how-to-draw-an-apple')
+        self.assertEqual(note1.content, 'Just draw an apple tree and erase the tree.')
+
+    def test_note_user_foreign_key_validity(self):
+        """Tests if note.owner is properly assigned"""
+
+        note1 = SecurityNote.objects.get(pk=1)
+        user = User.objects.get(pk=1)
+
+        self.assertEqual(note1.owner, user)
+
+    def test_note_create_validity(self):
+        """Tests if created notes are valid or not"""
+
+        note1 = SecurityNote.objects.get(pk=1)
+        note2 = SecurityNote.objects.get(pk=2)
+        note3 = SecurityNote.objects.get(pk=3)
+        note4 = SecurityNote.objects.get(pk=4)
+
+        self.assertEqual(SecurityNote.objects.all().count(), 4)
+
+        self.assertTrue(note1.is_valid())
+        self.assertFalse(note2.is_valid())
+        self.assertFalse(note3.is_valid())
+        self.assertFalse(note4.is_valid())
+
+    def test_note_update_validity(self):
+        """Tests if updated notes are valid or not"""
+
+        SecurityNote.objects.filter(pk=1).update(title='How not to draw an apple')
+        SecurityNote.objects.filter(pk=2).update(slug='how-to-draw-a-tree')
+        SecurityNote.objects.filter(pk=3).update(content='Draw a tree and then the apples.')
+        SecurityNote.objects.filter(pk=4).update(content='Draw an apple tree and then erase the apples and the tree.')
+
+        note1 = SecurityNote.objects.get(pk=1)
+        note2 = SecurityNote.objects.get(pk=2)
+        note3 = SecurityNote.objects.get(pk=3)
+        note4 = SecurityNote.objects.get(pk=4)
+
+        self.assertFalse(note1.is_valid())
+        self.assertTrue(note2.is_valid())
+        self.assertTrue(note3.is_valid())
+        self.assertTrue(note4.is_valid())
+
+    def test_note_delete_validity(self):
+        """Tests if note objects are correctly deleted or not"""
+
+        note1 = SecurityNote.objects.get(pk=1)
+        note2 = SecurityNote.objects.get(pk=2)
+        note3 = SecurityNote.objects.get(pk=3)
+        note4 = SecurityNote.objects.get(pk=4)
+        
+        note2.delete()
+        note3.delete()
+        note4.delete()
+
+        self.assertEqual(SecurityNote.objects.all().count(), 1)
+
+        self.assertTrue(note1.is_valid())
