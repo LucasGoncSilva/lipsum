@@ -131,7 +131,7 @@ class Card(models.Model):
         verbose_name='Apelido (ex: Cartão da Família, Cartão de Milhas)'
     )
     card_type: object = models.CharField(
-        max_length=16,
+        max_length=4,
         choices=cards_types,
         verbose_name='Tipo (débito, crédito, ...)'
     )
@@ -171,7 +171,7 @@ class Card(models.Model):
     updated: object = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f'{str(self.owner.first_name)} | {self.model} | {self.name}'
+        return f'{str(self.owner.first_name)} | {self.card_type} | {self.name}'
 
     def get_absolute_url(self) -> str:
         return str(self.slug)

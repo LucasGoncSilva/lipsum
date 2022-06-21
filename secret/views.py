@@ -19,6 +19,7 @@ def index(request):
 def credential_list_view(request) -> object:
     return render(request, 'secret/list_view.html', {
         'object_list': request.user.credentials.all(),
+        'model_name': 'Credenciais'
     })
 
 
@@ -78,6 +79,7 @@ class CredentialDeleteView(DeleteView):
 def card_list_view(request) -> object:
     return render(request, 'secret/list_view.html', {
         'object_list': request.user.cards.all(),
+        'model_name': 'Cartões'
     })
 
 
@@ -137,6 +139,7 @@ class CardDeleteView(DeleteView):
 def note_list_view(request) -> object:
     return render(request, 'secret/list_view.html', {
         'object_list': request.user.notes.all(),
+        'model_name': 'Anotações'
     })
 
 

@@ -69,7 +69,7 @@
             {% for i in cards %}
             <a href="{% url 'secret:card_detail_view' i.pk %}">
                 <div class="px-4">
-                    <img class="my-1" src="/static/secret/img/Card/{{ i.brand }}.svg">
+                    <img class="my-1" src="/static/secret/img/Card/{{ i.bank }}.svg">
                     <h5>{{ i.name }}</h5>
                 </div>
             </a>

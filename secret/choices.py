@@ -23,10 +23,10 @@ brands: list[str] = [
 ]
 
 cards_types: list[str] = [
-    ('Débito', 'Débito'),
-    ('Crédito', 'Crédito'),
-    ('Pré-pago', 'Pré-pago'),
-    ('Co-branded', 'Co-branded'),
+    ('deb', 'Débito'),
+    ('cred', 'Crédito'),
+    ('pre', 'Pré-pago'),
+    ('co', 'Co-branded'),
 ]
 
 
