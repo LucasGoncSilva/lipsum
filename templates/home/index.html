@@ -67,7 +67,7 @@
             <legend>Cartões recém-adicionados</legend>
 
             {% for i in cards %}
-            <a href="{% url 'secret:card_detail_view' i.pk %}">
+            <a href="{% url 'secret:card_detail_view' i.slug %}">
                 <div class="px-4">
                     <img class="my-1" src="/static/secret/img/Card/{{ i.bank }}.svg">
                     <h5>{{ i.name }}</h5>
@@ -114,7 +114,7 @@
             <legend>Anotações recém-adicionadas</legend>
 
             {% for i in notes %}
-            <a href="{% url 'secret:note_detail_view' i.pk %}">
+            <a href="{% url 'secret:note_detail_view' i.slug %}">
                 <div class="px-4">
                     <img class="my-1" src="{% static 'home/index/img/file.png' %}">
                     <h5>{{ i.title }}</h5>
