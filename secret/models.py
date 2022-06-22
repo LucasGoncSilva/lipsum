@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator
+from django.urls import reverse
 
 from accounts.models import User
 from .month.models import MonthField
@@ -45,7 +46,7 @@ class LoginCredential(models.Model):
         return f'{str(self.owner.first_name)} | {self.service} | {self.name}'
 
     def get_absolute_url(self) -> str:
-        return str(self.slug)
+        return reverse('secret:credential_list_view')
 
     def expected_max_length(self, var: str) -> int:
         max_length = {
@@ -174,7 +175,7 @@ class Card(models.Model):
         return f'{str(self.owner.first_name)} | {self.card_type} | {self.name}'
 
     def get_absolute_url(self) -> str:
-        return str(self.slug)
+        return reverse('secret:card_list_view')
 
     def expected_max_length(self, var: str) -> int:
         max_length = {
@@ -287,7 +288,7 @@ class SecurityNote(models.Model):
         return f'{str(self.owner.first_name)} | {self.title}'
 
     def get_absolute_url(self) -> str:
-        return str(self.slug)
+        return reverse('secret:note_list_view')
 
     def expected_max_length(self, var: str) -> int:
         max_length = {
