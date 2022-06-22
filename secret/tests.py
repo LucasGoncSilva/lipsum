@@ -231,7 +231,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='deb',
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv='113',
@@ -245,7 +245,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Crediário',  # Inexintent type
+            card_type='creda',  # Inexintent type
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -259,7 +259,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='deb',
             number='123456789',  # Length out of range
             expiration=Month(2028, 11),
             cvv=12,  # Length out of range
@@ -273,7 +273,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='deb',
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -287,7 +287,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='deb',
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
@@ -301,7 +301,7 @@ class CardTestCase(TestCase):
         Card.objects.create(
             owner=test_user,
             name='Personal Main Card',
-            card_type='Débito',
+            card_type='deb',
             number='4002892240028922',
             expiration='2023/4',
             cvv=113,
@@ -334,7 +334,7 @@ class CardTestCase(TestCase):
         card1 = Card.objects.get(pk=1)
 
         self.assertEqual(card1.name, 'Personal Main Card')
-        self.assertEqual(card1.card_type, 'Débito')
+        self.assertEqual(card1.card_type, 'deb')
         self.assertEqual(card1.number, '4002892240028922')
         self.assertEqual(card1.expiration, Month(2028, 11))
         self.assertEqual(card1.cvv, '113')
@@ -374,7 +374,7 @@ class CardTestCase(TestCase):
         """Tests if updated cards are valid or not"""
 
         Card.objects.filter(pk=1).update(cvv='14000605')
-        Card.objects.filter(pk=2).update(card_type='Débito')
+        Card.objects.filter(pk=2).update(card_type='deb')
         Card.objects.filter(pk=3).update(number='1122334455667788', cvv='1986')
         Card.objects.filter(pk=4).update(bank='pagseguro-', slug='pagseguro--personal-main-card')
         Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
