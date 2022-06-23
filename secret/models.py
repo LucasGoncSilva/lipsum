@@ -197,6 +197,31 @@ class Card(models.Model):
     def get_absolute_url(self) -> str:
         return reverse('secret:card_list_view')
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.card_type = cover(self.card_type, self.owner.password)
+        self.number = cover(self.number, self.owner.password)
+        self.cvv = cover(self.cvv, self.owner.password)
+        self.bank = cover(self.bank, self.owner.password)
+        self.brand = cover(self.brand, self.owner.password)
+        self.owners_name = cover(self.owners_name, self.owner.password)
+        self.note = cover(self.note, self.owner.password)
+
+        return super(Card, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+
+    @classmethod
+    def from_db(cls, db, field_names, values):
+        card = super().from_db(db, field_names, values)
+
+        card.card_type = uncover(card.card_type, card.owner.password)
+        card.number = uncover(card.number, card.owner.password)
+        card.cvv = uncover(card.cvv, card.owner.password)
+        card.bank = uncover(card.bank, card.owner.password)
+        card.brand = uncover(card.brand, card.owner.password)
+        card.owners_name = uncover(card.owners_name, card.owner.password)
+        card.note = uncover(card.note, card.owner.password)
+
+        return card
+
     def expected_max_length(self, var: str) -> int:
         max_length = {
             'name': 40,
@@ -309,6 +334,17 @@ class SecurityNote(models.Model):
 
     def get_absolute_url(self) -> str:
         return reverse('secret:note_list_view')
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.content = cover(self.content, self.owner.password)
+
+        return super(SecurityNote, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+
+    @classmethod
+    def from_db(cls, db, field_names, values):
+        note = super().from_db(db, field_names, values)
+        note.content = uncover(note.content, note.owner.password)
+        return note
 
     def expected_max_length(self, var: str) -> int:
         max_length = {
