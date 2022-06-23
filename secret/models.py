@@ -3,7 +3,6 @@ from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator
 from django.urls import reverse
 
-from LIPSUM.settings.base import SECRET_KEY
 from .encript_db import cover, uncover
 from accounts.models import User
 from .month.models import MonthField
@@ -50,17 +49,23 @@ class LoginCredential(models.Model):
     def get_absolute_url(self) -> str:
         return reverse('secret:credential_list_view')
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.thirdy_party_login_name = cover(self.thirdy_party_login_name, self.owner.password)
+        self.login = cover(self.login, self.owner.password)
+        self.password = cover(self.password, self.owner.password)
+        self.note = cover(self.note, self.owner.password)
+
+        return super(LoginCredential, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+
     @classmethod
     def from_db(cls, db, field_names, values):
         cred = super().from_db(db, field_names, values)
-        """
-        TODO: function to encrypt and decrypt data below
 
-        cred.thirdy_party_login_name = ''
-        cred.login = ''
-        cred.password = ''
-        cred.note = ''
-        """
+        cred.thirdy_party_login_name = uncover(cred.thirdy_party_login_name, cred.owner.password)
+        cred.login = uncover(cred.login, cred.owner.password)
+        cred.password = uncover(cred.password, cred.owner.password)
+        cred.note = uncover(cred.note, cred.owner.password)
+
         return cred
 
     def expected_max_length(self, var: str) -> int:
