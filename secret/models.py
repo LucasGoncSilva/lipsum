@@ -100,7 +100,7 @@ class LoginCredential(models.Model):
     def all_fields_present(self) -> bool:
         if self.owner and self.name \
         and self.service in [slug for slug, _ in credentials_services] \
-        and self.slug == f'{self.service}-{slugify(self.name)}' \
+        and self.slug == f'{self.service}{slugify(self.name)}' \
         and self.thirdy_party_login_name and self.login and self.password:
             if (self.thirdy_party_login == True and self.thirdy_party_login_name != '-----') \
             or (self.thirdy_party_login != True and self.login != '-----' and self.password != '-----'):
@@ -277,7 +277,7 @@ class Card(models.Model):
                     and self.bank in [slug for slug, _ in cards_banks] \
                         and self.brand in [slug for slug, _ in cards_brands] \
                             and self.owners_name \
-                                and self.slug == f'{self.bank}-{slugify(self.name)}'
+                                and self.slug == f'{self.bank}{slugify(self.name)}'
 
     def all_fields_of_correct_types(self) -> bool:
         if [

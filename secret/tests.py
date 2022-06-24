@@ -20,7 +20,7 @@ class CredentialTestCase(TestCase):
         # Object 1
         LoginCredential.objects.create(
             owner=test_user,
-            service='google-',
+            service='google--',
             name='Personal Main Account',
             slug='google--personal-main-account',
             thirdy_party_login=False,
@@ -32,7 +32,7 @@ class CredentialTestCase(TestCase):
         # Object 2
         LoginCredential.objects.create(
             owner=test_user,
-            service='steam-',
+            service='steam--',
             name='Little Fries',
             slug='steam--little-fries',
             thirdy_party_login=True,
@@ -44,7 +44,7 @@ class CredentialTestCase(TestCase):
         # Object 3
         LoginCredential.objects.create(
             owner=test_user,
-            service='steam-',
+            service='steam--',
             name='Little Fries',
             slug='steam--little-fries',
             thirdy_party_login=True,  # Should be False or...
@@ -56,7 +56,7 @@ class CredentialTestCase(TestCase):
         # Object 4
         LoginCredential.objects.create(
             owner=test_user,
-            service='steam-',
+            service='steam--',
             name='Little Fries',
             slug='steam--potato',  # Should be 'steam--little-fries'
             thirdy_party_login=False,
@@ -68,7 +68,7 @@ class CredentialTestCase(TestCase):
         # Object 5
         LoginCredential.objects.create(
             owner=test_user,
-            service='steam-',
+            service='steam--',
             name='Little Fries',
             slug='steam--little-fries',
             thirdy_party_login=False,
@@ -80,7 +80,7 @@ class CredentialTestCase(TestCase):
         # Object 6
         LoginCredential.objects.create(
             owner=test_user,
-            service='google-',
+            service='google--',
             name='Salve'*9,  # More chars than the limit
             slug='google--personal-main-account',
             thirdy_party_login=False,
@@ -92,7 +92,7 @@ class CredentialTestCase(TestCase):
         # Object 7
         LoginCredential.objects.create(
             owner=test_user,
-            service='pampas-gonden-radio-',  # Inexistent service
+            service='pampas-gonden-radio--',  # Inexistent service
             name='Little Fries',
             slug='pampas-gonden-radio--little-fries',
             thirdy_party_login=True,
@@ -125,7 +125,7 @@ class CredentialTestCase(TestCase):
 
         cred1 = LoginCredential.objects.get(pk=1)
 
-        self.assertEqual(cred1.service, 'google-')
+        self.assertEqual(cred1.service, 'google--')
         self.assertEqual(cred1.name, 'Personal Main Account')
         self.assertEqual(cred1.slug, 'google--personal-main-account')
         self.assertFalse(cred1.thirdy_party_login)
@@ -177,7 +177,7 @@ class CredentialTestCase(TestCase):
         LoginCredential.objects.filter(pk=4).update(slug='steam--little-fries', login='some_login_text_or_email_or_some_other_stuff_like_this')
         LoginCredential.objects.filter(pk=5).update(password='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
         LoginCredential.objects.filter(pk=6).update(name='Personal Main Account', login='bananinha_assada_3_2_1')
-        LoginCredential.objects.filter(pk=7).update(service='visa-', slug='visa--little-fries')
+        LoginCredential.objects.filter(pk=7).update(service='visa--', slug='visa--little-fries')
 
         cred1 = LoginCredential.objects.get(pk=1)
         cred2 = LoginCredential.objects.get(pk=2)
@@ -236,8 +236,8 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv='113',
-            bank='nubank-',
-            brand='mastercard-',
+            bank='nubank--',
+            brand='mastercard--',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )  # Correct object
@@ -250,8 +250,8 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
-            bank='nubank-',
-            brand='mastercard-',
+            bank='nubank--',
+            brand='mastercard--',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )
@@ -264,8 +264,8 @@ class CardTestCase(TestCase):
             number='123456789',  # Length out of range
             expiration=Month(2028, 11),
             cvv=12,  # Length out of range
-            bank='nubank-',
-            brand='mastercard-',
+            bank='nubank--',
+            brand='mastercard--',
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )
@@ -278,8 +278,8 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
-            bank='mingau-',  # Inexistent bank
-            brand='mastercard-',
+            bank='mingau--',  # Inexistent bank
+            brand='mastercard--',
             slug='mingau--personal-main-card',
             owners_name='TEST USER',
         )
@@ -292,8 +292,8 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration=Month(2028, 11),
             cvv=113,
-            bank='nubank-',
-            brand='mastercard-',
+            bank='nubank--',
+            brand='mastercard--',
             slug='nubank--minotauro',  # Should be 'nubank--personal-main-card'
             owners_name='TEST USER',
         )
@@ -306,8 +306,8 @@ class CardTestCase(TestCase):
             number='4002892240028922',
             expiration='2023/4',
             cvv=113,
-            bank='nubank-',
-            brand='vina-',  # Inexistent brand
+            bank='nubank--',
+            brand='vina--',  # Inexistent brand
             slug='nubank--personal-main-card',
             owners_name='TEST USER',
         )
@@ -339,8 +339,8 @@ class CardTestCase(TestCase):
         self.assertEqual(card1.number, '4002892240028922')
         self.assertEqual(card1.expiration, Month(2028, 11))
         self.assertEqual(card1.cvv, '113')
-        self.assertEqual(card1.bank, 'nubank-')
-        self.assertEqual(card1.brand, 'mastercard-')
+        self.assertEqual(card1.bank, 'nubank--')
+        self.assertEqual(card1.brand, 'mastercard--')
         self.assertEqual(card1.slug, 'nubank--personal-main-card')
         self.assertEqual(card1.owners_name, 'TEST USER')
 
@@ -383,11 +383,11 @@ class CardTestCase(TestCase):
             cvv=cover('1986', user.password)
         )
         Card.objects.filter(pk=4).update(
-            bank=cover('pagseguro-', user.password),
+            bank=cover('pagseguro--', user.password),
             slug='pagseguro--personal-main-card'
         )
         Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
-        Card.objects.filter(pk=6).update(brand=cover('mastercard-', user.password))
+        Card.objects.filter(pk=6).update(brand=cover('mastercard--', user.password))
 
         card1 = Card.objects.get(pk=1)
         card2 = Card.objects.get(pk=2)
