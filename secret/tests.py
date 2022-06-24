@@ -3,6 +3,7 @@ from django.test import TestCase
 from accounts.models import User
 from .models import Card, LoginCredential, SecurityNote
 from .month.models import Month
+from .encript_db import cover, uncover
 
 
 # Create your tests here.
@@ -373,12 +374,20 @@ class CardTestCase(TestCase):
     def test_card_update_validity(self):
         """Tests if updated cards are valid or not"""
 
-        Card.objects.filter(pk=1).update(cvv='14000605')
-        Card.objects.filter(pk=2).update(card_type='deb')
-        Card.objects.filter(pk=3).update(number='1122334455667788', cvv='1986')
-        Card.objects.filter(pk=4).update(bank='pagseguro-', slug='pagseguro--personal-main-card')
+        user = User.objects.get(pk=1)
+
+        Card.objects.filter(pk=1).update(cvv=cover('14000605', user.password))
+        Card.objects.filter(pk=2).update(card_type=cover('deb', user.password))
+        Card.objects.filter(pk=3).update(
+            number=cover('1122334455667788', user.password),
+            cvv=cover('1986', user.password)
+        )
+        Card.objects.filter(pk=4).update(
+            bank=cover('pagseguro-', user.password),
+            slug='pagseguro--personal-main-card'
+        )
         Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
-        Card.objects.filter(pk=6).update(brand='mastercard-')
+        Card.objects.filter(pk=6).update(brand=cover('mastercard-', user.password))
 
         card1 = Card.objects.get(pk=1)
         card2 = Card.objects.get(pk=2)

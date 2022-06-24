@@ -4,7 +4,7 @@
 <h1 align='center'>:notebook: LIPSUM :notebook:</h1>
 
 
-<h4 align='justify'>Made with Django as MVC framework, this project works for serving as a real, useful online password manager. It uses criptography to store the secrets in DB, so even admins can't see raw passwords, only hashes.</h4>
+<h4 align='justify'>Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.</h4>
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum?style=for-the-badge)
@@ -31,7 +31,7 @@
 <img align='center' src='https://img.shields.io/badge/-work%20in%20progress...-fb0?style=for-the-badge'/>
 <p>
 
-
+<!-- TODO: update self links -->
 <!-- <p align='center'>:link: Check here: https:// :link:</p> -->
 
 
@@ -71,14 +71,15 @@
 - [x] Save different services, even more than one save per services (e.g. two Instagram's accounts)
 - [x] Save login's info for each saved service, such as email, username and password
 - [x] Edit saved secrets once they get altered on the respective service
-- [x] Export your secrets to your email (the same used for login in this app)
-- [x] Generate locally pseudo-random passwords as platform suggestion
+- [ ] Export your secrets to your email (the same used for login in this app)
+- [ ] Generate locally pseudo-random passwords as platform suggestion
 
 
 <!-- Graph right here
 ```mermaid
 graph LR
 
+TODO: representate the cryptography arch
 
 ```
 <h5 align='center'></h5>

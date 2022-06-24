@@ -82,8 +82,8 @@ WSGI_APPLICATION = 'LIPSUM.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': BASE_DIR / 'db_test.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': BASE_DIR / 'db_test.sqlite3',
         # TODO: remove this thing
     }
 }

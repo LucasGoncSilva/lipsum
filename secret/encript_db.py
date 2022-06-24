@@ -2,8 +2,20 @@ from LIPSUM.settings.base import SECRET_KEY
 
 
 def cover(text: str, key: str) -> str:
+    if text is None:
+        return text
+
+    try:
+        text = str(text)
+    except:
+        return text
+
+    text_len = len(text)
     chars = []
-    keys_cat = list(zip(key*4, SECRET_KEY*4))
+    keys_cat = list(zip(
+        key * (text_len // len(key) + 1),
+        SECRET_KEY * (text_len // len(SECRET_KEY) + 1)
+    ))
     xor_key = []
     text_list = []
 
@@ -26,8 +38,20 @@ def cover(text: str, key: str) -> str:
 
 
 def uncover(text: str, key: str) -> str:
+    if text is None:
+        return text
+
+    try:
+        text = str(text)
+    except:
+        return text
+
+    text_len = len(text)
     chars = []
-    keys_cat = list(zip(key*4, SECRET_KEY*4))
+    keys_cat = list(zip(
+        key * (text_len // len(key) + 1),
+        SECRET_KEY * (text_len // len(SECRET_KEY) + 1)
+    ))
     xor_key = []
     text_list = []
 

@@ -58,7 +58,7 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-xg bg-light px-5">
+        <nav class="navbar navbar-expand-xg bg-light px-5"> <!-- TODO: fix navbar-expand-lg/xg -->
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="/">
@@ -137,7 +137,7 @@
                     <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            Olá, {{ request.user.username }}!
+                            Olá, {{ request.user.first_name }}!
                         </li>
                         {% else %}
                         <li class="nav-item">

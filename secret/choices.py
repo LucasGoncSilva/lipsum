@@ -87,6 +87,8 @@ services: list[str] = [
     ('yahoo-', 'Yahoo'),
 ] + banks + brands
 
+# TODO: add default/other services
+# TODO: change services from 'xxxx-' to 'xxxx--' and update model's is_valid
 
 cards_banks = sorted(set(banks), key=lambda x: x[1])
 cards_brands = sorted(set(brands), key=lambda x: x[1])

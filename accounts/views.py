@@ -34,6 +34,10 @@ class LogInForm(forms.Form):
             }
         )
     )
+    # TODO: add MFA and captcha
+
+
+# TODO: add registration page
 
 
 def login_view(request: object) -> object:
@@ -50,7 +54,7 @@ def login_view(request: object) -> object:
             try:
                 username = User.objects.get(email=email).username
             except User.DoesNotExist:
-                messages.error(request, 'Email inválido.')
+                messages.error(request, 'Email e/ou senha inválida.')
                 return render(request, 'accounts/login.html', {
                     'form': form
                 })
@@ -61,7 +65,7 @@ def login_view(request: object) -> object:
                 login(request, user)
                 return HttpResponseRedirect(reverse('home:index'))
 
-            messages.error(request, 'Senha inválida')
+            messages.error(request, 'Email e/ou senha inválida')
             return render(request, 'accounts/login.html', {
                 'form': form
             })
