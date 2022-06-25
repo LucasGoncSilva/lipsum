@@ -7,6 +7,12 @@ window.addEventListener('DOMContentLoaded', function () {
   const password = document.getElementById('id_password')
   const thirdyPartyCheck = document.getElementById('id_thirdy_party_login')
   const form = document.querySelector('form')
+  const service = document.getElementById('id_service')
+  const name = document.getElementById('id_name')
+  const slug_field = document.getElementById('id_slug')
+
+
+  slug_field.readOnly = true
 
 
   if (thirdyPartyCheck.checked) {
@@ -24,6 +30,11 @@ window.addEventListener('DOMContentLoaded', function () {
     thirdyPartyLoginDiv.classList.toggle('hide')
     loginDiv.classList.toggle('hide')
     passwordDiv.classList.toggle('hide')
+  }
+
+
+  function populateSlug() {
+    slug_field.value = service.value + slugify(name.value)
   }
 
 
@@ -49,4 +60,11 @@ window.addEventListener('DOMContentLoaded', function () {
       password.value = '-----'
     }
   }
+
+  service.addEventListener('change', populateSlug)
+  service.addEventListener('focus', populateSlug)
+  service.addEventListener('keyup', populateSlug)
+  name.addEventListener('change', populateSlug)
+  name.addEventListener('focus', populateSlug)
+  name.addEventListener('keyup', populateSlug)
 })

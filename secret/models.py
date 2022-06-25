@@ -26,7 +26,6 @@ class LoginCredential(models.Model):
         max_length=40,
         verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
     )
-    slug: object = models.SlugField(max_length=128)
     thirdy_party_login: object = models.BooleanField(verbose_name='Login com serviço de terceiro?')
     thirdy_party_login_name: object = models.CharField(
         max_length=40,
@@ -40,6 +39,7 @@ class LoginCredential(models.Model):
         null=True,
         verbose_name='Anotação particular'
     )
+    slug: object = models.SlugField(max_length=128)
     created: object = models.DateTimeField(auto_now_add=True)
     updated: object = models.DateTimeField(auto_now=True)
 
@@ -177,11 +177,11 @@ class Card(models.Model):
         choices=cards_brands,
         verbose_name='Bandeira'
     )
-    slug: object = models.SlugField(max_length=128)
     owners_name: object = models.CharField(
         max_length=64,
         verbose_name='Nome do Titular (como no cartão)'
     )
+    slug: object = models.SlugField(max_length=128)
     note: object = models.TextField(
         max_length=128,
         blank=True,
