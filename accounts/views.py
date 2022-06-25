@@ -1,3 +1,6 @@
+from time import sleep
+from random import uniform
+
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -54,6 +57,7 @@ def login_view(request: object) -> object:
             try:
                 username = User.objects.get(email=email).username
             except User.DoesNotExist:
+                sleep(uniform(.3, .53))
                 messages.error(request, 'Email e/ou senha inválida.')
                 return render(request, 'accounts/login.html', {
                     'form': form
