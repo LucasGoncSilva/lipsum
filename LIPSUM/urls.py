@@ -6,11 +6,11 @@ urlpatterns = [
     path('__manager__/', admin.site.urls),
     path('admin/', include('honeypot.urls')),
     # System functionality's pages
-    path('accounts/', include('accounts.urls')),
+    path('conta/', include('accounts.urls')),
     path('captcha/', include('captcha.urls')),
     # User's pages
     path('', include('home.urls')),
-    path('secret/', include('secret.urls')),
+    path('segredos/', include('secret.urls')),
 ]
 
 # TODO: handle common errors
