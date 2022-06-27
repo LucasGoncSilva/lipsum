@@ -14,8 +14,8 @@ urlpatterns = [
 ]
 
 # TODO: handle common errors
-# handler403 = 'hub.views.error403'
-# handler404 = 'hub.views.error404'
-# handler500 = 'hub.views.error500'
+handler403 = 'err.views.handle403'
+handler404 = 'err.views.handle404'
+handler500 = 'err.views.handle500'
 
 # TODO: set password recovery

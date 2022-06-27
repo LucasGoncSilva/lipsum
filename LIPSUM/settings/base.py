@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'honeypot',
     'home',
     'secret',
+    'err',
 ]
 
 MIDDLEWARE = [
