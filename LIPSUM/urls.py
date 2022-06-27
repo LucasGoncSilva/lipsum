@@ -13,6 +13,9 @@ urlpatterns = [
     path('secret/', include('secret.urls')),
 ]
 
+# TODO: handle common errors
 # handler403 = 'hub.views.error403'
 # handler404 = 'hub.views.error404'
 # handler500 = 'hub.views.error500'
+
+# TODO: set password recovery
