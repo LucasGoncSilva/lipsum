@@ -2,6 +2,11 @@ name: Django CI Testing
 
 on: [push, fork, pull_request]
 
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
+
 jobs:
   build:
 
@@ -19,12 +24,11 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
+        echo "This is a secret key: $SECRET_KEY"
+        echo "This is hosts: $ALLOWED_HOSTS"
+        echo "This is the module: $DJANGO_SETTING_MODULE"
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-        DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
     - name: Run Tests
       run: |
         python manage.py test
