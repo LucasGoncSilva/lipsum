@@ -1,12 +1,16 @@
 @import '../../shared/css/constants';
 
 body > div {
-    margin-top: 20vh;
+    margin-top: 10vh;
     display: grid;
     place-items: center;
 
     img {
         height: 60px;
+    }
+
+    img:not(img:first-child) {
+        margin-bottom: 3rem;
     }
 }
 
@@ -32,4 +36,8 @@ form {
 
 #confirm-btn {
     width: 100%;
+}
+
+.captcha {
+    height: 10vh;
 }

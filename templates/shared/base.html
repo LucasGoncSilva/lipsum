@@ -128,9 +128,10 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">Dashboard</a>
-                        </li>
+                        </li> -->
+                        <!-- TODO: create this -->
                     </ul>
                     {% endif %}
 
@@ -154,7 +155,7 @@
                     <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger px-4">Encerrar Sessão</a>
                     {% else %}
                     <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary me-3 px-4">Entrar</a>
-                    <a href="#" class="btn btn-primary px-4">Registrar-se</a>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary px-4">Registrar-se</a>
                     {% endif %}
                 </div>
             </div>
