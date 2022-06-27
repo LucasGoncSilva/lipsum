@@ -7,7 +7,8 @@
 <h4 align='justify'>Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.</h4>
 
 
-![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum?label=last%20main%20commit&style=for-the-badge)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum/dev?label=last%20dev%20commit&style=for-the-badge)
 ![Lines of code](https://img.shields.io/tokei/lines/github/LucasGoncSilva/lipsum?label=project%27s%20total%20lines&style=for-the-badge)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LucasGoncSilva/lipsum?color=4717f6&style=for-the-badge)
 
