@@ -70,6 +70,19 @@ services: list[str] = [
     ('vercel--', 'Vercel'),
     ('wordpress--', 'Wordpress'),
     ('yahoo--', 'Yahoo'),
+    ('atari--', 'Atari'),
+    ('blizzard--', 'Blizzard Entertainment'),
+    ('lg--', 'LG'),
+    ('motorola--', 'Motorola'),
+    ('nintendo--', 'Nintendo'),
+    ('playstation--', 'PlayStation'),
+    ('riot-games--', 'Riot Games'),
+    ('samsung--', 'Samsung'),
+    ('skype--', 'Skype'),
+    ('slack--', 'Slack'),
+    ('supercell--', 'Supercell'),
+    ('wargaming--', 'Wargaming'),
+    ('xbox--', 'Xbox'),
 ] + banks + brands
 
 
