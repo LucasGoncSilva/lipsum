@@ -20,7 +20,8 @@
     <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
 
 
-    <form action="{% url 'accounts:register' %}" method="post" autocomplete="off" class="row g-3 mx-auto mb-5 text-center">
+    <form action="{% url 'accounts:register' %}" method="post" autocomplete="off"
+        class="row g-3 mx-auto mb-5 text-center">
         {% csrf_token %}
 
         <h1>Cadastrar</h1>
@@ -34,8 +35,10 @@
         {{ form|crispy }}
 
         <div>
-            <input id="confirm-btn" class="btn btn-outline-primary mt-4" type="submit" value="Confirmar">
+            <input id="confirm-btn" class="btn btn-primary mt-4" type="submit" value="Confirmar">
         </div>
+        <br><a href="{% url 'accounts:login' %}" class="btn btn-outline-primary px-2 mx-auto" style="max-width: 210px;">Já
+            possuo uma conta</a>
 
     </form>
 

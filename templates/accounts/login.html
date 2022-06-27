@@ -34,8 +34,11 @@
         {% endif %}
 
         <div>
-            <input id="confirm-btn" class="btn btn-outline-primary mt-4" type="submit" value="Confirmar">
+            <input id="confirm-btn" class="btn btn-primary mt-4" type="submit" value="Confirmar">
         </div>
+
+        <br><a href="#" class="btn btn-outline-secondary">Recuperar senha</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary">Criar conta agora</a>
 
     </form>
 
