@@ -24,11 +24,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
-        echo "This is a secret key: $SECRET_KEY"
-        echo "This is hosts: $ALLOWED_HOSTS"
-        echo "This is the module: $DJANGO_SETTING_MODULE"
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python manage.py test --pattern="tests.py"
