@@ -23,7 +23,7 @@ h1 {
     margin-bottom: 2rem;
 }
 
-form {
+form, #msg {
     width: 90vw;
     max-width: 1000px;
     margin-top: 5vh;
@@ -32,6 +32,10 @@ form {
     border-radius: 1rem;
     box-shadow: 0 0 15px $accent-color;
     background: $main-color;
+}
+
+li::marker {
+    color: transparent;
 }
 
 #confirm-btn {
