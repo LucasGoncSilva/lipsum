@@ -90,12 +90,12 @@ class RegisterForm(forms.Form):
 
 
 class LogInForm(forms.Form):
-    email = forms.CharField(
+    username = forms.CharField(
         label = '',
         required = True,
         widget = forms.TextInput(
             attrs = {
-                'placeholder': 'Email*',
+                'placeholder': 'Username*',
                 'class': 'py-2',
                 'style': 'text-align: center;',
                 'autofocus': 'autofocus'
@@ -113,7 +113,7 @@ class LogInForm(forms.Form):
             }
         )
     )
-    # TODO: add MFA and captcha
+    # TODO: add MFA
 
 
 def register_view(request: object) -> object:
@@ -162,17 +162,8 @@ def login_view(request: object) -> object:
         form = LogInForm(request.POST)
 
         if form.is_valid():
-            email = form.cleaned_data.get('email').strip()
+            username = form.cleaned_data.get('username').strip()
             password = form.cleaned_data.get('password').strip()
-
-            try:
-                username = User.objects.get(email=email).username
-            except User.DoesNotExist:
-                sleep(uniform(.3, .53))
-                messages.error(request, 'Email e/ou senha inválida.')
-                return render(request, 'accounts/login.html', {
-                    'form': form
-                })
             
             user = authenticate(username=username, password=password)
 
@@ -180,7 +171,7 @@ def login_view(request: object) -> object:
                 login(request, user)
                 return HttpResponseRedirect(reverse('home:index'))
 
-            messages.error(request, 'Email e/ou senha inválida')
+            messages.error(request, 'Username e/ou senha inválida')
             return render(request, 'accounts/login.html', {
                 'form': form
             })
