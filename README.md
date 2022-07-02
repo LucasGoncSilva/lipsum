@@ -1,10 +1,10 @@
 ![The project's banner](https://github.com/LucasGoncSilva/lipsum/blob/main/readme_banner.svg?raw=true)
 
 
-# :notebook: LIPSUM :notebook:
+<h1 align='center'>:notebook: LIPSUM :notebook:</h1>
 
 
-#### Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.
+<h4 align='justify'>Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.</h4>
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum?label=last%20main%20commit&style=for-the-badge)
@@ -24,7 +24,7 @@
 <hr>
 
 
-## :chart_with_upwards_trend: Project's Status :chart_with_upwards_trend:
+<h2 align='center'>:chart_with_upwards_trend: Project's Status :chart_with_upwards_trend:</h2>
 
 <img src='https://img.shields.io/badge/-Successfully%20done-0b0?style=for-the-badge'/>
 <img src='https://img.shields.io/badge/-also%20work%20in%20progress...-fb0?style=for-the-badge'/>
@@ -36,7 +36,7 @@
 <hr>
 
 
-## :floppy_disk: Applied Technologies :cloud:
+<h2 align='center'>:floppy_disk: Applied Technologies :cloud:</h2>
 
 
 ![HTML logo](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -62,7 +62,7 @@
 <hr>
 
 
-## :star: Features :star:
+<h2 align='center'>:star: Features :star:</h2>
 
 
 - [x] Save different services, even more than one save per services (e.g. two Instagram's accounts)
@@ -72,7 +72,6 @@
 - [ ] Generate locally pseudo-random passwords as platform suggestion
 
 
-Graph right here
 ```mermaid
 flowchart RL
 
@@ -115,16 +114,17 @@ style Uncover fill:#afa,color:#070,stroke:#070;
 
 classDef Arch fill:#f0f0ff,color:#008,stroke:#6f6fff;
 ```
-##### Lipsum's current architecture
+<h5 align='center'>Lipsum's current architecture</h5>
 
 
 <br>
 <hr>
 
 
-## :compass: Using :crystal_ball:
+<h2 align='center'>:compass: Using :crystal_ball:</h2>
 
 ### Creating an Account
+
 To start, if do not having an account, create one by going ate `/conta/registrar`, fill and submit the presented form. Then, insert your `username` and `password` you filled the creation form. Already have an account? Log in directly at `/conta/entrar` or clicking "Entrar" button.
 
 <hr>
@@ -165,7 +165,7 @@ Here you get a detailed view of the choosen secret, showing every information of
 <hr>
 
 
-## :warning: WARNINGS :warning:
+<h2 align='center'>:warning: WARNINGS :warning:</h2>
 
 * This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.
 * Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.
