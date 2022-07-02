@@ -9,7 +9,7 @@ from .encript_db import cover, uncover
 # Create your tests here.
 class CredentialTestCase(TestCase):
     def setUp(self):
-        test_user = User.objects.create(
+        test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
             email='test@email.com',
@@ -220,7 +220,7 @@ class CredentialTestCase(TestCase):
 
 class CardTestCase(TestCase):
     def setUp(self):
-        test_user = User.objects.create(
+        test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
             email='test@email.com',
@@ -376,18 +376,18 @@ class CardTestCase(TestCase):
 
         user = User.objects.get(pk=1)
 
-        Card.objects.filter(pk=1).update(cvv=cover('14000605', user.password))
-        Card.objects.filter(pk=2).update(card_type=cover('deb', user.password))
+        Card.objects.filter(pk=1).update(cvv=cover('14000605', user.password[21:]))
+        Card.objects.filter(pk=2).update(card_type=cover('deb', user.password[21:]))
         Card.objects.filter(pk=3).update(
-            number=cover('1122334455667788', user.password),
-            cvv=cover('1986', user.password)
+            number=cover('1122334455667788', user.password[21:]),
+            cvv=cover('1986', user.password[21:])
         )
         Card.objects.filter(pk=4).update(
-            bank=cover('pagseguro--', user.password),
+            bank=cover('pagseguro--', user.password[21:]),
             slug='pagseguro--personal-main-card'
         )
         Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
-        Card.objects.filter(pk=6).update(brand=cover('mastercard--', user.password))
+        Card.objects.filter(pk=6).update(brand=cover('mastercard--', user.password[21:]))
 
         card1 = Card.objects.get(pk=1)
         card2 = Card.objects.get(pk=2)
@@ -426,7 +426,7 @@ class CardTestCase(TestCase):
 
 class SecurityNoteTestCase(TestCase):
     def setUp(self):
-        test_user = User.objects.create(
+        test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
             email='test@email.com',

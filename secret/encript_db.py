@@ -11,13 +11,13 @@ def cover(text: str, key: str) -> str:
         return text
 
     text_len = len(text)
-    chars = []
+    chars, xor_key, text_list = [], [], []
+    func_secret_key = SECRET_KEY[16:]
+
     keys_cat = list(zip(
         key * (text_len // len(key) + 1),
-        SECRET_KEY * (text_len // len(SECRET_KEY) + 1)
+        func_secret_key * (text_len // len(func_secret_key) + 1)
     ))
-    xor_key = []
-    text_list = []
 
     # define the key
     for i in keys_cat:
@@ -47,13 +47,13 @@ def uncover(text: str, key: str) -> str:
         return text
 
     text_len = len(text)
-    chars = []
+    chars, xor_key, text_list = [], [], []
+    func_secret_key = SECRET_KEY[16:]
+
     keys_cat = list(zip(
         key * (text_len // len(key) + 1),
-        SECRET_KEY * (text_len // len(SECRET_KEY) + 1)
+        func_secret_key * (text_len // len(func_secret_key) + 1)
     ))
-    xor_key = []
-    text_list = []
 
     # define the key
     for i in keys_cat:
