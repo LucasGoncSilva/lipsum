@@ -3,7 +3,6 @@ from django.shortcuts import render
 
 # Create your views here.
 def handle403(request: object, *args, **kwargs) -> object:
-    # print(e)
     return render(request, 'err/error_template.html', {
         'code': 403,
         'message1': 'Você não tem autorização para proseguir.',
@@ -12,7 +11,6 @@ def handle403(request: object, *args, **kwargs) -> object:
 
 
 def handle404(request: object, *args, **kwargs) -> object:
-# def handle404(request: object, e) -> object:
     return render(request, 'err/error_template.html', {
         'code': 404,
         'message1': 'O endereço requisitado não foi encontrado.',

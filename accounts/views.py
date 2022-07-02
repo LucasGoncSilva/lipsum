@@ -1,25 +1,22 @@
-from time import sleep
-from random import uniform
-
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
-from django import forms
+from django.forms import Form, CharField, TextInput, EmailField, PasswordInput
 from captcha.fields import CaptchaField
 
 from .models import User
 
 
 # Create your views here.
-class RegisterForm(forms.Form):
-    username = forms.CharField(
+class RegisterForm(Form):
+    username: object = CharField(
         label='',
         max_length=50,
         required=True,
-        widget = forms.TextInput(
+        widget = TextInput(
             attrs = {
                 'placeholder': 'Username (nome de usuário)*',
                 'class': 'py-2',
@@ -29,11 +26,11 @@ class RegisterForm(forms.Form):
         ),
         help_text='50 caracteres ou menos. Letras, números e @/./+/-/_ apenas.',
     )
-    first_name = forms.CharField(
+    first_name: object = CharField(
         label='',
         max_length=32,
         required=True,
-        widget = forms.TextInput(
+        widget = TextInput(
             attrs = {
                 'placeholder': 'Nome*',
                 'class': 'py-2',
@@ -41,11 +38,11 @@ class RegisterForm(forms.Form):
             }
         ),
     )
-    last_name = forms.CharField(
+    last_name: object = CharField(
         label='',
         max_length=150,
         required=True,
-        widget = forms.TextInput(
+        widget = TextInput(
             attrs = {
                 'placeholder': 'Sobrenome*',
                 'class': 'py-2',
@@ -53,10 +50,10 @@ class RegisterForm(forms.Form):
             }
         ),
     )
-    email = forms.EmailField(
+    email: object = EmailField(
         label='',
         required=True,
-        widget = forms.TextInput(
+        widget = TextInput(
             attrs = {
                 'placeholder': 'Email*',
                 'class': 'mt-3 py-2',
@@ -64,10 +61,10 @@ class RegisterForm(forms.Form):
             }
         )
     )
-    password = forms.CharField(
+    password: object = CharField(
         label = '',
         required = True,
-        widget = forms.PasswordInput(
+        widget = PasswordInput(
             attrs = {
                 'placeholder': 'Senha*',
                 'class': 'mt-3 py-2',
@@ -75,10 +72,10 @@ class RegisterForm(forms.Form):
             }
         )
     )
-    password2 = forms.CharField(
+    password2: object = CharField(
         label = '',
         required = True,
-        widget = forms.PasswordInput(
+        widget = PasswordInput(
             attrs = {
                 'placeholder': 'Confirmação de senha*',
                 'class': 'mt-3 mb-5 py-2',
@@ -86,14 +83,14 @@ class RegisterForm(forms.Form):
             }
         )
     )
-    captcha = CaptchaField()
+    captcha: object = CaptchaField()
 
 
-class LogInForm(forms.Form):
-    username = forms.CharField(
+class LogInForm(Form):
+    username = CharField(
         label = '',
         required = True,
-        widget = forms.TextInput(
+        widget = TextInput(
             attrs = {
                 'placeholder': 'Username*',
                 'class': 'py-2',
@@ -102,10 +99,10 @@ class LogInForm(forms.Form):
             }
         )
     )
-    password = forms.CharField(
+    password: object = CharField(
         label = '',
         required = True,
-        widget = forms.PasswordInput(
+        widget = PasswordInput(
             attrs = {
                 'placeholder': 'Pass*',
                 'class': 'mt-3 py-2',
@@ -116,75 +113,86 @@ class LogInForm(forms.Form):
     # TODO: add MFA
 
 
-def register_view(request: object) -> object:
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-
-        if form.is_valid():
-            password = form.cleaned_data.get('password')
-            password2 = form.cleaned_data.get('password2')
-
-            if password and password2 and password == password2:
-                username = form.cleaned_data.get('username')
-
-                if not User.objects.filter(username=username).exists():
-                    first_name = form.cleaned_data.get('first_name')
-                    last_name = form.cleaned_data.get('last_name')
-                    email = form.cleaned_data.get('email')
-
-                    User.objects.create_user(
-                        username=username,
-                        first_name=first_name,
-                        last_name=last_name,
-                        email=email,
-                        password=password
-                    )
-
-                    return HttpResponseRedirect(reverse('accounts:login'))
-
-                messages.error(request, 'Username indisponível')
-                return render(request, 'accounts/register.html', {'form': form})
-
-            messages.error(request, 'Senhas não compatíveis')
-            return render(request, 'accounts/register.html', {'form': form})
-
-        return render(request, 'accounts/register.html', {'form': form})
-
-    form = RegisterForm()
-    return render(request, 'accounts/register.html', {'form': form})
-
-
-def login_view(request: object) -> object:
-    if request.user.is_authenticated:
+def register_view(req: HttpRequest) -> HttpResponse:
+    if req.user.is_authenticated:
         return HttpResponseRedirect(reverse('home:index'))
 
-    elif request.method == 'POST':
-        form = LogInForm(request.POST)
+    elif req.method == 'POST':
+        form: Form = RegisterForm(req.POST)
 
         if form.is_valid():
-            username = form.cleaned_data.get('username').strip()
-            password = form.cleaned_data.get('password').strip()
+            password: str = form.cleaned_data.get('password')
+            password2: str = form.cleaned_data.get('password2')
+
+            if not password or not password2 or password != password2:
+                messages.error(req, 'Senhas não compatíveis')
+                return render(req, 'accounts/register.html', {'form': form})
+
+            username: str = form.cleaned_data.get('username')
+            email: str = form.cleaned_data.get('email')
+
+            if User.objects.filter(username=username).exists():
+                messages.error(req, 'Username indisponível')
+                return render(req, 'accounts/register.html', {'form': form})
+
+            if User.objects.filter(email=email).exists():
+                messages.error(req, 'E-mail indisponível')
+                return render(req, 'accounts/register.html', {'form': form})
+
+            first_name: str = form.cleaned_data.get('first_name')
+            last_name: str = form.cleaned_data.get('last_name')
+
+            User.objects.create_user(
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                password=password
+            )
+
+            return HttpResponseRedirect(reverse('accounts:login'))
+
+        return render(req, 'accounts/register.html', {'form': form})
+
+    form: Form = RegisterForm()
+    return render(req, 'accounts/register.html', {'form': form})
+
+
+def login_view(req: HttpRequest) -> HttpResponse:
+    if req.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home:index'))
+
+    elif req.method == 'POST':
+        form: Form = LogInForm(req.POST)
+
+        if form.is_valid():
+            username: str = form.cleaned_data.get('username').strip()
+            password: str = form.cleaned_data.get('password').strip()
             
-            user = authenticate(username=username, password=password)
+            user: User = authenticate(username=username, password=password)
 
             if user is not None:
-                login(request, user)
+                login(req, user)
                 return HttpResponseRedirect(reverse('home:index'))
 
-            messages.error(request, 'Username e/ou senha inválida')
-            return render(request, 'accounts/login.html', {
+            messages.error(req, 'Username e/ou senha inválida')
+            return render(req, 'accounts/login.html', {
                 'form': form
             })
 
-    return render(request, 'accounts/login.html', {
+        return render(req, 'accounts/login.html', {
+            'form': form
+        })
+
+    return render(req, 'accounts/login.html', {
         'form': LogInForm()
     })
 
 
 @login_required
-def logout_view(request: object) -> object:
-    if request.method == 'POST':
-        logout(request)
+def logout_view(req: HttpRequest) -> HttpResponseRedirect:
+    if req.method == 'POST':
+        logout(req)
         return HttpResponseRedirect(reverse('accounts:login'))
 
-    return render(request, 'accounts/logout.html')
+    return render(req, 'accounts/logout.html')
