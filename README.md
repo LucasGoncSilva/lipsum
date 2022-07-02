@@ -28,12 +28,12 @@
 
 
 <p align='center'>
-<!-- <img align='center' src='https://img.shields.io/badge/-Successfully%20done-0b0?style=for-the-badge'/> -->
-<img align='center' src='https://img.shields.io/badge/-work%20in%20progress...-fb0?style=for-the-badge'/>
+<img align='center' src='https://img.shields.io/badge/-Successfully%20done-0b0?style=for-the-badge'/>
+<img align='center' src='https://img.shields.io/badge/-also%20work%20in%20progress...-fb0?style=for-the-badge'/>
 <p>
 
-<!-- TODO: update self links -->
-<!-- <p align='center'>:link: Check here: https:// :link:</p> -->
+
+<p align='center'>:link: Check here: https://lipsum.herokuapp.com :link:</p>
 
 
 <br>
@@ -76,15 +76,50 @@
 - [ ] Generate locally pseudo-random passwords as platform suggestion
 
 
-<!-- Graph right here
+Graph right here
 ```mermaid
-graph LR
+flowchart RL
 
-TODO: representate the cryptography arch
+subgraph CLOUD
+    subgraph SYSTEM/APP
+        View((View)):::Arch
+        Template{Template}:::Arch
+        Model{{Model}}:::Arch
+    end
 
+    Cover[/"cover()"/]
+    Uncover[/"uncover()"/]
+
+    subgraph DB-INSTANCE
+        Database[(Database)]:::Arch
+    end
+end
+
+User((User))
+
+
+User -- CreateView:POST ----> View
+View --> Model -- insert --> Cover --> Database
+Model -- select --> Database
+Database --> Uncover --> Model
+Model --> View --> Template
+Template -- DetailView --> User
+
+
+click Cover "https://github.com/LucasGoncSilva/lipsum/blob/main/secret/encript_db.py"
+click Uncover "https://github.com/LucasGoncSilva/lipsum/blob/main/secret/encript_db.py"
+
+
+style CLOUD fill:#f0f0ff;
+style SYSTEM/APP fill:#fff;
+style DB-INSTANCE fill:#fff;
+style User fill:#aaf,color:#fff,stroke:#008;
+style Cover fill:#afa,color:#070,stroke:#070;
+style Uncover fill:#afa,color:#070,stroke:#070;
+
+classDef Arch fill:#f0f0ff,color:#008,stroke:#6f6fff;
 ```
-<h5 align='center'></h5>
--->
+<h5 align='center'>Lipsum's current architecture</h5>
 
 
 <br>
@@ -93,8 +128,37 @@ TODO: representate the cryptography arch
 
 <h2 align='center'>:compass: Using :crystal_ball:</h2>
 
+<h3>Creating an Account</h3>
+<p>To start, if do not having an account, create one by going ate `/conta/registrar`, fill and submit the presented form. Then, insert your `username` and `password` you filled the creation form. Already have an account? Log in directly at `/conta/entrar` or clicking "Entrar" button.</p>
 
-<p>Keep calm, I'm building this things, then I'll say how to use it. For now, even me do not know how can I use it... :)</p>
+<hr>
+
+<h3>Undestanding the Interface</h3>
+<p>After log in, at every moment, there wil be a navbar at the top of the page. You can use it to navegate through the system and get some actions like:</p>
+
+<ul>
+    <li>Create and overview your credentials</li>
+    <li>Create and overview your cards</li>
+    <li>Create and overview your notes</li>
+    <li>Log out of your account</li>
+</ul>
+
+
+<h4>Index Page</h4>
+<p>This page shows the total of each secret (credentials, cards, notes) and a little history of your last secrets registration. Also gives you access to create and overview more secret.</p>
+
+
+<h4>Creation Page</h4>
+<p>Using navbar (clicking in a dropdown menu) or clicking an "Adicionar" button on index page, you access a creation page. As the page's form get filled, the `slug` (readonly) field gets that secret's reference; You can use it later to access that secret from url (e.g. `/segredo/cartao/:slug:`).</p>
+<p>Properly filling the page's form and submitting it, you create a new secret with the information filled in that creation form and get redirected to a page that shows all of your registered secrets of that type (credential - credencial; card - cartao/cartão; note - anotação).</p>
+
+
+<h4>List Page</h4>
+<p>This page shows all secret you registered, one type at once. You can access it after create a new secret or using navbar. By clicking a secret displayed here, the new page rendered is a detailed view of that secret. If there is no secret of a type registered, the page shows a text message. The green button gets you to the creation page.</p>
+
+
+<h4>Detail page</h4>
+<p>Here you get a detailed view of the choosen secret, showing every information of that one. Besides that, there are 3 buttons at the top: the blue one (for editting the current secret), the red (delete the current secret) and the gray one (for adding a new secret).</p>
 
 
 <br>
@@ -105,7 +169,6 @@ TODO: representate the cryptography arch
 
 
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li>This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.</li>
+<li>Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.</li>
 </ul>
