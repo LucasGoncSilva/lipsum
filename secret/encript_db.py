@@ -11,10 +11,10 @@ def cover(text: str, key: str) -> str:
         return text
 
     text_len = len(text)
-    chars, xor_key, text_list = [], [], []
-    func_secret_key = SECRET_KEY[16:]
+    xor_key, text_list = [], []
+    func_secret_key: str = SECRET_KEY[16:]
 
-    keys_cat = list(zip(
+    keys_cat: list[tuple[str, str]] = list(zip(
         key * (text_len // len(key) + 1),
         func_secret_key * (text_len // len(func_secret_key) + 1)
     ))
@@ -30,9 +30,7 @@ def cover(text: str, key: str) -> str:
     text_cat = list(zip(text_list, xor_key))
 
     # encrypt the text
-    for i in text_cat:
-        char_code = i[0] ^ i[1]
-        chars.append(chr(char_code))
+    chars = [chr(i[0] ^ i[1]) for i in text_cat]
 
     return ''.join(chars)
 
@@ -47,10 +45,10 @@ def uncover(text: str, key: str) -> str:
         return text
 
     text_len = len(text)
-    chars, xor_key, text_list = [], [], []
-    func_secret_key = SECRET_KEY[16:]
+    xor_key, text_list = [], []
+    func_secret_key: str = SECRET_KEY[16:]
 
-    keys_cat = list(zip(
+    keys_cat: list[tuple[str, str]] = list(zip(
         key * (text_len // len(key) + 1),
         func_secret_key * (text_len // len(func_secret_key) + 1)
     ))
@@ -66,8 +64,6 @@ def uncover(text: str, key: str) -> str:
     text_cat = list(zip(text_list, xor_key))
 
     # encrypt the text
-    for i in text_cat:
-        char_code = i[0] ^ i[1]
-        chars.append(chr(char_code))
+    chars = [chr(i[0] ^ i[1]) for i in text_cat]
 
     return ''.join(chars)

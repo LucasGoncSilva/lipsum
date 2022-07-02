@@ -171,6 +171,8 @@ class CredentialTestCase(TestCase):
     def test_credential_update_validity(self):
         """Tests if updated credentials are valid or not"""
 
+        # TODO: take care of these tests
+
         LoginCredential.objects.filter(pk=1).update(service='')
         LoginCredential.objects.filter(pk=2).update(slug='diners-club-international--tupinamba')
         LoginCredential.objects.filter(pk=3).update(thirdy_party_login=False)
