@@ -1,10 +1,10 @@
 ![The project's banner](https://github.com/LucasGoncSilva/lipsum/blob/main/readme_banner.svg?raw=true)
 
 
-<h1 align='center'>:notebook: LIPSUM :notebook:</h1>
+# :notebook: LIPSUM :notebook:
 
 
-<h4 align='justify'>Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.</h4>
+#### Made with Django as MVC framework, this project works as a real, useful online password manager. It uses cryptography to store the secrets in DB, so a DB leak of information will presents only encrypted data instead of raw sensitive information.
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LucasGoncSilva/lipsum?label=last%20main%20commit&style=for-the-badge)
@@ -24,23 +24,19 @@
 <hr>
 
 
-<h2 align='center'>:chart_with_upwards_trend: Project's Status :chart_with_upwards_trend:</h2>
+## :chart_with_upwards_trend: Project's Status :chart_with_upwards_trend:
 
+<img src='https://img.shields.io/badge/-Successfully%20done-0b0?style=for-the-badge'/>
+<img src='https://img.shields.io/badge/-also%20work%20in%20progress...-fb0?style=for-the-badge'/>
 
-<p align='center'>
-<img align='center' src='https://img.shields.io/badge/-Successfully%20done-0b0?style=for-the-badge'/>
-<img align='center' src='https://img.shields.io/badge/-also%20work%20in%20progress...-fb0?style=for-the-badge'/>
-<p>
-
-
-<p align='center'>:link: Check here: https://lipsum.herokuapp.com :link:</p>
+:link: Check here: <https://lipsum.herokuapp.com> :link:
 
 
 <br>
 <hr>
 
 
-<h2 align='center'>:floppy_disk: Applied Technologies :cloud:</h2>
+## :floppy_disk: Applied Technologies :cloud:
 
 
 ![HTML logo](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -66,7 +62,7 @@
 <hr>
 
 
-<h2 align='center'>:star: Features :star:</h2>
+## :star: Features :star:
 
 
 - [x] Save different services, even more than one save per services (e.g. two Instagram's accounts)
@@ -119,56 +115,57 @@ style Uncover fill:#afa,color:#070,stroke:#070;
 
 classDef Arch fill:#f0f0ff,color:#008,stroke:#6f6fff;
 ```
-<h5 align='center'>Lipsum's current architecture</h5>
+##### Lipsum's current architecture
 
 
 <br>
 <hr>
 
 
-<h2 align='center'>:compass: Using :crystal_ball:</h2>
+## :compass: Using :crystal_ball:
 
-<h3>Creating an Account</h3>
+### Creating an Account
 To start, if do not having an account, create one by going ate `/conta/registrar`, fill and submit the presented form. Then, insert your `username` and `password` you filled the creation form. Already have an account? Log in directly at `/conta/entrar` or clicking "Entrar" button.
 
 <hr>
 
-<h3>Undestanding the Interface</h3>
-<p>After log in, at every moment, there wil be a navbar at the top of the page. You can use it to navegate through the system and get some actions like:</p>
+### Undestanding the Interface
 
-<ul>
-    <li>Create and overview your credentials</li>
-    <li>Create and overview your cards</li>
-    <li>Create and overview your notes</li>
-    <li>Log out of your account</li>
-</ul>
+After log in, at every moment, there wil be a navbar at the top of the page. You can use it to navegate through the system and get some actions like:
 
-
-<h4>Index Page</h4>
-<p>This page shows the total of each secret (credentials, cards, notes) and a little history of your last secrets registration. Also gives you access to create and overview more secret.</p>
+* Create and overview your credentials
+* Create and overview your cards
+* Create and overview your notes
+* Log out of your account
 
 
-<h4>Creation Page</h4>
-<p>Using navbar (clicking in a dropdown menu) or clicking an "Adicionar" button on index page, you access a creation page. As the page's form get filled, the `slug` (readonly) field gets that secret's reference; You can use it later to access that secret from url (e.g. `/segredo/cartao/:slug:`).</p>
-<p>Properly filling the page's form and submitting it, you create a new secret with the information filled in that creation form and get redirected to a page that shows all of your registered secrets of that type (credential - credencial; card - cartao/cartão; note - anotação).</p>
+#### Index Page
+
+This page shows the total of each secret (credentials, cards, notes) and a little history of your last secrets registration. Also gives you access to create and overview more secret.
 
 
-<h4>List Page</h4>
-<p>This page shows all secret you registered, one type at once. You can access it after create a new secret or using navbar. By clicking a secret displayed here, the new page rendered is a detailed view of that secret. If there is no secret of a type registered, the page shows a text message. The green button gets you to the creation page.</p>
+#### Creation Page
+
+Using navbar (clicking in a dropdown menu) or clicking an "Adicionar" button on index page, you access a creation page. As the page's form get filled, the `slug` (readonly) field gets that secret's reference; You can use it later to access that secret from url (e.g. `/segredo/cartao/:slug:`).
+
+Properly filling the page's form and submitting it, you create a new secret with the information filled in that creation form and get redirected to a page that shows all of your registered secrets of that type (credential - credencial; card - cartao/cartão; note - anotação).
 
 
-<h4>Detail page</h4>
-<p>Here you get a detailed view of the choosen secret, showing every information of that one. Besides that, there are 3 buttons at the top: the blue one (for editting the current secret), the red (delete the current secret) and the gray one (for adding a new secret).</p>
+#### List Page
+
+This page shows all secret you registered, one type at once. You can access it after create a new secret or using navbar. By clicking a secret displayed here, the new page rendered is a detailed view of that secret. If there is no secret of a type registered, the page shows a text message. The green button gets you to the creation page.
+
+
+#### Detail page
+
+Here you get a detailed view of the choosen secret, showing every information of that one. Besides that, there are 3 buttons at the top: the blue one (for editting the current secret), the red (delete the current secret) and the gray one (for adding a new secret).
 
 
 <br>
 <hr>
 
 
-<h3 align='center'>:warning: WARNINGS :warning:</h3>
+## :warning: WARNINGS :warning:
 
-
-<ul>
-<li>This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.</li>
-<li>Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.</li>
-</ul>
+* This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.
+* Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.
