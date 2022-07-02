@@ -125,7 +125,7 @@ classDef Arch fill:#f0f0ff,color:#008,stroke:#6f6fff;
 
 ### Creating an Account
 
-To start, if do not having an account, create one by going ate `/conta/registrar`, fill and submit the presented form. Then, insert your `username` and `password` you filled the creation form. Already have an account? Log in directly at `/conta/entrar` or clicking "Entrar" button.
+To start, if do not having an account, create one by going to `/conta/registrar`, fill and submit the presented form. Then, insert your `username` and `password` you filled the creation form. Already have an account? Log in directly at `/conta/entrar` or clicking "Entrar" button.
 
 <hr>
 
