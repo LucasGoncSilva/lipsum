@@ -169,3 +169,4 @@ Here you get a detailed view of the choosen secret, showing every information of
 
 * This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.
 * Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.
+* Microservice for password reset not ready (free tier issues)
