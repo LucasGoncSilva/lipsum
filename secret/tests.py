@@ -3,7 +3,7 @@ from django.test import TestCase
 from accounts.models import User
 from .models import Card, LoginCredential, SecurityNote
 from .month.models import Month
-from .encript_db import cover, uncover
+from .xor_db import xor
 
 
 # Create your tests here.
@@ -378,18 +378,18 @@ class CardTestCase(TestCase):
 
         user = User.objects.get(pk=1)
 
-        Card.objects.filter(pk=1).update(cvv=cover('14000605', user.password[21:]))
-        Card.objects.filter(pk=2).update(card_type=cover('deb', user.password[21:]))
+        Card.objects.filter(pk=1).update(cvv=xor('14000605', user.password[21:]))
+        Card.objects.filter(pk=2).update(card_type=xor('deb', user.password[21:]))
         Card.objects.filter(pk=3).update(
-            number=cover('1122334455667788', user.password[21:]),
-            cvv=cover('1986', user.password[21:])
+            number=xor('1122334455667788', user.password[21:]),
+            cvv=xor('1986', user.password[21:])
         )
         Card.objects.filter(pk=4).update(
-            bank=cover('pagseguro--', user.password[21:]),
+            bank=xor('pagseguro--', user.password[21:]),
             slug='pagseguro--personal-main-card'
         )
         Card.objects.filter(pk=5).update(slug='nubank--personal-main-card')
-        Card.objects.filter(pk=6).update(brand=cover('mastercard--', user.password[21:]))
+        Card.objects.filter(pk=6).update(brand=xor('mastercard--', user.password[21:]))
 
         card1 = Card.objects.get(pk=1)
         card2 = Card.objects.get(pk=2)

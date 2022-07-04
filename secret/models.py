@@ -3,8 +3,8 @@ from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator
 from django.urls import reverse
 
-from .encript_db import cover, uncover
 from accounts.models import User
+from .xor_db import xor
 from .month.models import MonthField
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
 
@@ -50,10 +50,10 @@ class LoginCredential(models.Model):
         return reverse('secret:credential_list_view')
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.thirdy_party_login_name = cover(self.thirdy_party_login_name, self.owner.password[21:])
-        self.login = cover(self.login, self.owner.password[21:])
-        self.password = cover(self.password, self.owner.password[21:])
-        self.note = cover(self.note, self.owner.password[21:])
+        self.thirdy_party_login_name = xor(self.thirdy_party_login_name, self.owner.password[21:])
+        self.login = xor(self.login, self.owner.password[21:])
+        self.password = xor(self.password, self.owner.password[21:])
+        self.note = xor(self.note, self.owner.password[21:])
 
         return super(LoginCredential, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
 
@@ -61,10 +61,10 @@ class LoginCredential(models.Model):
     def from_db(cls, db, field_names, values):
         cred = super().from_db(db, field_names, values)
 
-        cred.thirdy_party_login_name = uncover(cred.thirdy_party_login_name, cred.owner.password[21:])
-        cred.login = uncover(cred.login, cred.owner.password[21:])
-        cred.password = uncover(cred.password, cred.owner.password[21:])
-        cred.note = uncover(cred.note, cred.owner.password[21:])
+        cred.thirdy_party_login_name = xor(cred.thirdy_party_login_name, cred.owner.password[21:])
+        cred.login = xor(cred.login, cred.owner.password[21:])
+        cred.password = xor(cred.password, cred.owner.password[21:])
+        cred.note = xor(cred.note, cred.owner.password[21:])
 
         return cred
 
@@ -198,13 +198,13 @@ class Card(models.Model):
         return reverse('secret:card_list_view')
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.card_type = cover(self.card_type, self.owner.password[21:])
-        self.number = cover(self.number, self.owner.password[21:])
-        self.cvv = cover(self.cvv, self.owner.password[21:])
-        self.bank = cover(self.bank, self.owner.password[21:])
-        self.brand = cover(self.brand, self.owner.password[21:])
-        self.owners_name = cover(self.owners_name, self.owner.password[21:])
-        self.note = cover(self.note, self.owner.password[21:])
+        self.card_type = xor(self.card_type, self.owner.password[21:])
+        self.number = xor(self.number, self.owner.password[21:])
+        self.cvv = xor(self.cvv, self.owner.password[21:])
+        self.bank = xor(self.bank, self.owner.password[21:])
+        self.brand = xor(self.brand, self.owner.password[21:])
+        self.owners_name = xor(self.owners_name, self.owner.password[21:])
+        self.note = xor(self.note, self.owner.password[21:])
 
         return super(Card, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
 
@@ -212,13 +212,13 @@ class Card(models.Model):
     def from_db(cls, db, field_names, values):
         card = super().from_db(db, field_names, values)
 
-        card.card_type = uncover(card.card_type, card.owner.password[21:])
-        card.number = uncover(card.number, card.owner.password[21:])
-        card.cvv = uncover(card.cvv, card.owner.password[21:])
-        card.bank = uncover(card.bank, card.owner.password[21:])
-        card.brand = uncover(card.brand, card.owner.password[21:])
-        card.owners_name = uncover(card.owners_name, card.owner.password[21:])
-        card.note = uncover(card.note, card.owner.password[21:])
+        card.card_type = xor(card.card_type, card.owner.password[21:])
+        card.number = xor(card.number, card.owner.password[21:])
+        card.cvv = xor(card.cvv, card.owner.password[21:])
+        card.bank = xor(card.bank, card.owner.password[21:])
+        card.brand = xor(card.brand, card.owner.password[21:])
+        card.owners_name = xor(card.owners_name, card.owner.password[21:])
+        card.note = xor(card.note, card.owner.password[21:])
 
         return card
 
@@ -336,14 +336,14 @@ class SecurityNote(models.Model):
         return reverse('secret:note_list_view')
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.content = cover(self.content, self.owner.password[21:])
+        self.content = xor(self.content, self.owner.password[21:])
 
         return super(SecurityNote, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
 
     @classmethod
     def from_db(cls, db, field_names, values):
         note = super().from_db(db, field_names, values)
-        note.content = uncover(note.content, note.owner.password[21:])
+        note.content = xor(note.content, note.owner.password[21:])
         return note
 
     def expected_max_length(self, var: str) -> int:
