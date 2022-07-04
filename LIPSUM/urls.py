@@ -1,9 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, \
+                                        PasswordResetConfirmView, PasswordResetCompleteView
+from django.urls import URLPattern
 from django.urls import path, include
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 
-urlpatterns = [
+urlpatterns: list[URLPattern] = [
     # Adm pages
     path('__manager__/', admin.site.urls),
     path('admin/', include('honeypot.urls')),
@@ -18,6 +20,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('segredos/', include('secret.urls')),
 ]
+
 
 handler403 = 'err.views.handle403'
 handler404 = 'err.views.handle404'
