@@ -1,11 +1,12 @@
 from django.urls import path, re_path
+from django.urls.resolvers import URLPattern
 
 from . import views
 
 
 app_name = 'honeypot'
 
-urlpatterns = [
+urlpatterns: list[URLPattern] = [
     path('', views.honeypot, name='empty_redirect'),
     path('<path:path>', views.honeypot, name='redirect'),
     re_path(r'^(?P<path>.*)/$', views.honeypot, name='re_redirect'),
