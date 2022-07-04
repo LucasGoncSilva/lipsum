@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, URLPattern
 
 from . import views as v
 
 
 app_name = 'secret'
 
-urlpatterns = [
+urlpatterns: list[URLPattern] = [
     path('', v.index, name='index'),
     # Credentials views
     path('credenciais/', v.credential_list_view, name='credential_list_view'),

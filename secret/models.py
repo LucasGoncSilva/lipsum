@@ -1,11 +1,11 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.core.validators import MinLengthValidator
 from django.urls import reverse
+from django.core.validators import MinLengthValidator
 
 from accounts.models import User
-from .xor_db import xor
 from .month.models import MonthField
+from .xor_db import xor
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
 
 

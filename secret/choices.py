@@ -1,4 +1,4 @@
-banks: list[str] = [
+banks: list[tuple[str, str]] = [
     ('banco-do-brasil--', 'Banco do Brasil'),
     ('original--', 'Banco Original'),
     ('bradesco--', 'Bradesco'),
@@ -13,7 +13,7 @@ banks: list[str] = [
     ('ticket--', 'Ticket'),
 ]
 
-brands: list[str] = [
+brands: list[tuple[str, str]] = [
     ('american-express--', 'American Express'),
     ('diners-club-international--', 'Diners Club International'),
     ('elo--', 'Elo'),
@@ -22,7 +22,7 @@ brands: list[str] = [
     ('visa--', 'Visa'),    
 ]
 
-cards_types: list[str] = [
+cards_types: list[tuple[str, str]] = [
     ('deb', 'Débito'),
     ('cred', 'Crédito'),
     ('pre', 'Pré-pago'),
@@ -30,7 +30,7 @@ cards_types: list[str] = [
 ]
 
 
-services: list[str] = [
+services: list[tuple[str, str]] = [
     ('aws--', 'AWS'),
     ('adobe--', 'Adobe'),
     ('airbnb--', 'Airbnb'),
