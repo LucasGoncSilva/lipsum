@@ -1,2 +1,2 @@
 release: python manage.py makemigrations; python manage.py migrate
-web: gunicorn LIPSUM.wsgi
+web: newrelic-admin run-program gunicorn LIPSUM.wsgi
