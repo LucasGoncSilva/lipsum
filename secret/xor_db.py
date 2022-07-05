@@ -1,7 +1,7 @@
 from LIPSUM.settings.base import SECRET_KEY
 
 
-def xor(text: str, key: str) -> str:
+def xor(text: str, key: str, encrypt: bool=True) -> str:
     if text is None:
         return text
 
@@ -19,15 +19,24 @@ def xor(text: str, key: str) -> str:
     ))
 
     # Define the key
-    xor_key: list[int] = [ord(i[0]) ^ ord(i[1]) for i in keys_cat]
+    xor_key: list[int] = [(ord(i[0]) ^ ord(i[1]) + 32) for i in keys_cat]
 
     # Get the code value for each char in text
-    text_list: list[int] = [ord(i) for i in text]
+    if encrypt:
+        text_list: list[int] = [ord(i) for i in text]
+    else:
+        text_list: list[int] = [(ord(i) - 32) for i in text]
 
     # Set the same len() for text_list and xor_key
     text_cat: list[tuple[int, int]] = list(zip(text_list, xor_key))
 
     # XOR the text
-    chars: list[str] = [chr(i[0] ^ i[1]) for i in text_cat]
+    if encrypt:
+        chars: list[str] = [chr((i[0] ^ i[1]) + 32) for i in text_cat]
+    else:
+        chars: list[str] = [chr(i[0] ^ i[1]) for i in text_cat]
+
+    if '\x00' in chars:
+        print('\n\n\nNULL\n\n\n')
 
     return ''.join(chars)

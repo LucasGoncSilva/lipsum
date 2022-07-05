@@ -61,10 +61,10 @@ class LoginCredential(models.Model):
     def from_db(cls, db, field_names, values):
         cred = super().from_db(db, field_names, values)
 
-        cred.thirdy_party_login_name = xor(cred.thirdy_party_login_name, cred.owner.password[21:])
-        cred.login = xor(cred.login, cred.owner.password[21:])
-        cred.password = xor(cred.password, cred.owner.password[21:])
-        cred.note = xor(cred.note, cred.owner.password[21:])
+        cred.thirdy_party_login_name = xor(cred.thirdy_party_login_name, cred.owner.password[21:], encrypt=False)
+        cred.login = xor(cred.login, cred.owner.password[21:], encrypt=False)
+        cred.password = xor(cred.password, cred.owner.password[21:], encrypt=False)
+        cred.note = xor(cred.note, cred.owner.password[21:], encrypt=False)
 
         return cred
 
@@ -212,13 +212,13 @@ class Card(models.Model):
     def from_db(cls, db, field_names, values):
         card = super().from_db(db, field_names, values)
 
-        card.card_type = xor(card.card_type, card.owner.password[21:])
-        card.number = xor(card.number, card.owner.password[21:])
-        card.cvv = xor(card.cvv, card.owner.password[21:])
-        card.bank = xor(card.bank, card.owner.password[21:])
-        card.brand = xor(card.brand, card.owner.password[21:])
-        card.owners_name = xor(card.owners_name, card.owner.password[21:])
-        card.note = xor(card.note, card.owner.password[21:])
+        card.card_type = xor(card.card_type, card.owner.password[21:], encrypt=False)
+        card.number = xor(card.number, card.owner.password[21:], encrypt=False)
+        card.cvv = xor(card.cvv, card.owner.password[21:], encrypt=False)
+        card.bank = xor(card.bank, card.owner.password[21:], encrypt=False)
+        card.brand = xor(card.brand, card.owner.password[21:], encrypt=False)
+        card.owners_name = xor(card.owners_name, card.owner.password[21:], encrypt=False)
+        card.note = xor(card.note, card.owner.password[21:], encrypt=False)
 
         return card
 
@@ -343,7 +343,7 @@ class SecurityNote(models.Model):
     @classmethod
     def from_db(cls, db, field_names, values):
         note = super().from_db(db, field_names, values)
-        note.content = xor(note.content, note.owner.password[21:])
+        note.content = xor(note.content, note.owner.password[21:], encrypt=False)
         return note
 
     def expected_max_length(self, var: str) -> int:
