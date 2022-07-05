@@ -36,7 +36,4 @@ def xor(text: str, key: str, encrypt: bool=True) -> str:
     else:
         chars: list[str] = [chr(i[0] ^ i[1]) for i in text_cat]
 
-    if '\x00' in chars:
-        print('\n\n\nNULL\n\n\n')
-
     return ''.join(chars)
