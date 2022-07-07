@@ -2,9 +2,9 @@ from django.test import TestCase
 from faker import Faker
 
 from accounts.models import User
-from .models import Card, LoginCredential, SecurityNote
-from .month.models import Month
-from .xor_db import xor
+from secret.models import Card, LoginCredential, SecurityNote
+from secret.month.models import Month
+from secret.xor_db import xor
 
 
 # Create your tests here.
