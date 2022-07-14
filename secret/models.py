@@ -24,7 +24,7 @@ class LoginCredential(models.Model):
     )
     name: object = models.CharField(
         max_length=40,
-        verbose_name='Apelido (ex: Conta Principal, Conta de Teste, Compartilhada)'
+        verbose_name='Apelido (ex: Conta Principal)'
     )
     thirdy_party_login: object = models.BooleanField(verbose_name='Login com serviço de terceiro?')
     thirdy_party_login_name: object = models.CharField(
@@ -149,7 +149,7 @@ class Card(models.Model):
     )
     name: object = models.CharField(
         max_length=40,
-        verbose_name='Apelido (ex: Cartão da Família, Cartão de Milhas)'
+        verbose_name='Apelido (ex: Cartão da Família)'
     )
     card_type: object = models.CharField(
         max_length=4,
