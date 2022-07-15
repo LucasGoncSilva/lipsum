@@ -181,13 +181,13 @@ class Card(models.Model):
         max_length=64,
         verbose_name='Nome do Titular (como no cartão)'
     )
-    slug: object = models.SlugField(max_length=128)
     note: object = models.TextField(
         max_length=128,
         blank=True,
         null=True,
         verbose_name='Anotação Particular'
     )
+    slug: object = models.SlugField(max_length=128)
     created: object = models.DateTimeField(auto_now_add=True)
     updated: object = models.DateTimeField(auto_now=True)
 
@@ -324,8 +324,8 @@ class SecurityNote(models.Model):
         verbose_name='Dono'
     )
     title: object = models.CharField(max_length=40, verbose_name='Título')
-    slug: object = models.SlugField(max_length=50)
     content: object = models.TextField(max_length=300, verbose_name='Conteúdo')
+    slug: object = models.SlugField(max_length=50)
     created: object = models.DateTimeField(auto_now_add=True)
     updated: object = models.DateTimeField(auto_now=True)
 

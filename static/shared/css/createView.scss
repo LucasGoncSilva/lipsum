@@ -14,5 +14,7 @@ form * {
 
 #exclude {
     background: $main-color;
-    border-radius: 2rem;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px $accent-color;
 }

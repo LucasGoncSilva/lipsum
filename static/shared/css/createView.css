@@ -1,2 +1,2 @@
-form{max-width:800px}form *{float:unset !important}.hide{display:none}#exclude{background:#ffff;border-radius:2rem}
+form{max-width:800px}form *{float:unset !important}.hide{display:none}#exclude{background:#ffff;border:1px solid transparent;border-radius:1rem;-webkit-box-shadow:0 0 15px #6f6fffff;box-shadow:0 0 15px #6f6fffff}
 /*# sourceMappingURL=createView.css.map */

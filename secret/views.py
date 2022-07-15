@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse
+
+# from accounts.models import User
 
 from .models import Card, LoginCredential, SecurityNote
 
@@ -41,12 +44,19 @@ class CredentialCreateView(CreateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CredentialCreateView, self).get_context_data(**kwargs)
         context['action'] = 'Adição'
         context['model'] = 'Credencial'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req):
+        if LoginCredential.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O serviço e apelido inseridos já foram utilizados juntos por você. Tente outro apelido')
+            return super().get(req)
+
+        return super().post(req)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
@@ -55,21 +65,28 @@ class CredentialUpdateView(UpdateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CredentialUpdateView, self).get_context_data(**kwargs)
         context['action'] = 'Edição'
         context['model'] = 'Credencial'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req, *args, **kwargs):
+        if LoginCredential.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O serviço e apelido inseridos já foram utilizados juntos por você. Tente outro apelido')
+            return super().get(req)
+
+        return super().post(req, *args, **kwargs)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
 class CredentialDeleteView(DeleteView):
     model = LoginCredential
     template_name = 'secret/delete_view.html'
-    success_url = '/secret/credentials'
+    success_url = '/segredos/credenciais'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CredentialDeleteView, self).get_context_data(**kwargs)
         context['action'] = 'Exclusão'
         context['model'] = 'Credencial'
@@ -104,12 +121,19 @@ class CardCreateView(CreateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CardCreateView, self).get_context_data(**kwargs)
         context['action'] = 'Adição'
         context['model'] = 'Cartão'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req):
+        if Card.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O banco e apelido inseridos já foram utilizados juntos por você. Tente outro apelido')
+            return super().get(req)
+
+        return super().post(req)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
@@ -118,21 +142,28 @@ class CardUpdateView(UpdateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CardUpdateView, self).get_context_data(**kwargs)
         context['action'] = 'Edição'
         context['model'] = 'Cartão'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req, *args, **kwargs):
+        if Card.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O banco e apelido inseridos já foram utilizados juntos por você. Tente outro apelido')
+            return super().get(req)
+
+        return super().post(req, *args, **kwargs)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
 class CardDeleteView(DeleteView):
     model = Card
     template_name = 'secret/delete_view.html'
-    success_url = '/secret/credentials'
+    success_url = '/segredos/cartoes'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CardDeleteView, self).get_context_data(**kwargs)
         context['action'] = 'Exclusão'
         context['model'] = 'Cartão'
@@ -167,12 +198,19 @@ class NoteCreateView(CreateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(NoteCreateView, self).get_context_data(**kwargs)
         context['action'] = 'Adição'
         context['model'] = 'Anotação'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req):
+        if SecurityNote.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O título inserido já foi utilizado por você. Tente outro.')
+            return super().get(req)
+
+        return super().post(req)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
@@ -181,21 +219,28 @@ class NoteUpdateView(UpdateView):
     template_name = 'secret/create_view.html'
     fields = '__all__'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(NoteUpdateView, self).get_context_data(**kwargs)
         context['action'] = 'Edição'
         context['model'] = 'Anotação'
-        # TODO: deal with two objects sharind the same slug
+
         return context
+
+    def post(self, req, *args, **kwargs):
+        if SecurityNote.objects.filter(owner=req.user, slug=req.POST.get('slug')).exists():
+            messages.error(req, 'O banco e apelido inseridos já foram utilizados juntos por você. Tente outro apelido')
+            return super().get(req)
+
+        return super().post(req, *args, **kwargs)
 
 
 @method_decorator(login_required(login_url='/conta/entrar'), name='dispatch')
 class NoteDeleteView(DeleteView):
     model = SecurityNote
     template_name = 'secret/delete_view.html'
-    success_url = '/secret/credentials'
+    success_url = '/segredos/anotacoes'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(NoteDeleteView, self).get_context_data(**kwargs)
         context['action'] = 'Exclusão'
         context['model'] = 'Anotação'
