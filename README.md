@@ -65,11 +65,13 @@
 <h2 align='center'>:star: Features :star:</h2>
 
 
-- [x] Save different services, even more than one save per services (e.g. two Instagram's accounts)
-- [x] Save login's info for each saved service, such as email, username and password
-- [x] Edit saved secrets once they get altered on the respective service
-- [ ] Export your secrets to your email (the same used for login in this app)
-- [ ] Generate locally pseudo-random passwords as platform suggestion
+- [ ] Protect account with MFA.
+- [x] Save different services, even more than one save per services (e.g. two Instagram's accounts).
+- [x] Save login's info for each saved service, such as email, username and password.
+- [x] Edit saved secrets once they get altered on the respective service.
+- [ ] Export your secrets to your email (the same used for sign up in this app).
+- [ ] Generate locally pseudo-random passwords as platform suggestion.
+- [ ] See general informations about your credentials with dashboard.
 
 
 ```mermaid
@@ -98,23 +100,23 @@ View --> Model -- insert --> Cover --> Database
 Model -- select --> Database
 Database --> Uncover --> Model
 Model --> View --> Template
-Template -- DetailView --> User
+Template -- ListView/DetailView --> User
 
 
 click Cover "https://github.com/LucasGoncSilva/lipsum/blob/main/secret/encript_db.py"
 click Uncover "https://github.com/LucasGoncSilva/lipsum/blob/main/secret/encript_db.py"
 
 
-style CLOUD fill:#f0f0ff;
-style SYSTEM/APP fill:#fff;
-style DB-INSTANCE fill:#fff;
+style CLOUD fill:#f0f0ff,color:#4717f6;
+style SYSTEM/APP fill:#fff,color:#4717f6;
+style DB-INSTANCE fill:#fff,color:#4717f6;
 style User fill:#aaf,color:#fff,stroke:#008;
 style Cover fill:#afa,color:#070,stroke:#070;
 style Uncover fill:#afa,color:#070,stroke:#070;
 
 classDef Arch fill:#f0f0ff,color:#008,stroke:#6f6fff;
 ```
-<h5 align='center'>Lipsum's current architecture</h5>
+<h5 align='center'>Lipsum's current CRUD architecture</h5>
 
 
 <br>
@@ -165,8 +167,28 @@ Here you get a detailed view of the choosen secret, showing every information of
 <hr>
 
 
+<h2 align='center'>:memo: TO-DO LIST :memo:</h2>
+
+* Complete the [FEATURES](https://github.com/LucasGoncSilva/lipsum#star-features-star) list.
+* Create the `/sobre` and `/services` pages listing about Lipsum and it's services, respectively.
+* Improve UI feedback information about chars count on input fields.
+
+
+<br>
+<hr>
+
+
 <h2 align='center'>:warning: WARNINGS :warning:</h2>
 
 * This project is already online, but also under development. Use it knowing that some bugs might happen, so keep, at least for now, your secrets that you have another way to access besides Lipsum.
 * Due to it's gratuity, Lipsum supports a limited number of users, requests/online time and secrets stored on it's database. At some point this system will no longer offers registration for new users, preventing the database to colapse.
-* Microservice for password reset not ready (free tier issues)
+* Microservice for password reset not ready (free tier issues).
+
+
+<br>
+<hr>
+
+
+<h2 align='center'>:briefcase: LICENSE :scroll:</h2>
+
+This project is under [MPLv2 - Mozilla Public License Version 2.0](https://choosealicense.com/licenses/mpl-2.0/). Permissions of this weak copyleft license are conditioned on making available source code of licensed files and modifications of those files under the same license (or in certain cases, one of the GNU licenses). Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. However, a larger work using the licensed work may be distributed under different terms and without source code for files added in the larger work.
