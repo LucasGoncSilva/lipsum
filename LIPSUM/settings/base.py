@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'whitenoise',
     'captcha',
     # Local
-    'accounts',
+    'account',
     'honeypot',
     'home',
     'secret',
@@ -135,8 +135,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # User Model
-AUTH_USER_MODEL = 'accounts.User'
-LOGOUT_REDIRECT_URL = 'accounts/login'
+AUTH_USER_MODEL = 'account.User'
+LOGOUT_REDIRECT_URL = 'conta/entrar'
 
 
 # Crispy Forms

@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.http import HttpRequest, HttpResponse
 
-# from accounts.models import User
+# from account.models import User
 
 from .models import Card, LoginCredential, SecurityNote
 

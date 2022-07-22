@@ -126,18 +126,18 @@ def register_view(req: HttpRequest) -> HttpResponse:
 
             if not password or not password2 or password != password2:
                 messages.error(req, 'Senhas não compatíveis')
-                return render(req, 'accounts/register.html', {'form': form})
+                return render(req, 'account/register.html', {'form': form})
 
             username: str = form.cleaned_data.get('username')
             email: str = form.cleaned_data.get('email')
 
             if User.objects.filter(username=username).exists():
                 messages.error(req, 'Username indisponível')
-                return render(req, 'accounts/register.html', {'form': form})
+                return render(req, 'account/register.html', {'form': form})
 
             if User.objects.filter(email=email).exists():
                 messages.error(req, 'E-mail indisponível')
-                return render(req, 'accounts/register.html', {'form': form})
+                return render(req, 'account/register.html', {'form': form})
 
             first_name: str = form.cleaned_data.get('first_name')
             last_name: str = form.cleaned_data.get('last_name')
@@ -150,12 +150,12 @@ def register_view(req: HttpRequest) -> HttpResponse:
                 password=password
             )
 
-            return HttpResponseRedirect(reverse('accounts:login'))
+            return HttpResponseRedirect(reverse('account:login'))
 
-        return render(req, 'accounts/register.html', {'form': form})
+        return render(req, 'account/register.html', {'form': form})
 
     form: Form = RegisterForm()
-    return render(req, 'accounts/register.html', {'form': form})
+    return render(req, 'account/register.html', {'form': form})
 
 
 def login_view(req: HttpRequest) -> HttpResponse:
@@ -176,15 +176,15 @@ def login_view(req: HttpRequest) -> HttpResponse:
                 return HttpResponseRedirect(reverse('home:index'))
 
             messages.error(req, 'Username e/ou senha inválida')
-            return render(req, 'accounts/login.html', {
+            return render(req, 'account/login.html', {
                 'form': form
             })
 
-        return render(req, 'accounts/login.html', {
+        return render(req, 'account/login.html', {
             'form': form
         })
 
-    return render(req, 'accounts/login.html', {
+    return render(req, 'account/login.html', {
         'form': LogInForm()
     })
 
@@ -193,6 +193,6 @@ def login_view(req: HttpRequest) -> HttpResponse:
 def logout_view(req: HttpRequest) -> HttpResponseRedirect:
     if req.method == 'POST':
         logout(req)
-        return HttpResponseRedirect(reverse('accounts:login'))
+        return HttpResponseRedirect(reverse('account:login'))
 
-    return render(req, 'accounts/logout.html')
+    return render(req, 'account/logout.html')

@@ -7,12 +7,12 @@
 
 
 {% block imports %}
-<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'account/css/style.css' %}">
 {% endblock %}
 
 
 {% block content %}
-<div class="text-center">
+<div class="text-center mb-5">
 
     <img src="{% static 'shared/img/logo_txt.svg' %}" alt="Lipsum's logo, the word in blue rounded custom font">
     <h5>Gerenciador de senhas online e intuitivo.</h5>
@@ -20,12 +20,11 @@
     <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
 
 
-    <form action="{% url 'accounts:login' %}" method="post" autocomplete="off">
+    <form action="{% url 'account:register' %}" method="post" autocomplete="off"
+        class="row g-3 mx-auto mb-5 text-center">
         {% csrf_token %}
 
-        <h1>Entrar</h1>
-
-        {{ form|crispy }}
+        <h1>Cadastrar</h1>
 
         {% if messages %}
         {% for message in messages %}
@@ -33,14 +32,16 @@
         {% endfor %}
         {% endif %}
 
+        {{ form|crispy }}
+
         <div>
             <input id="confirm-btn" class="btn btn-primary mt-4" type="submit" value="Confirmar">
         </div>
 
         <br>
 
-        <a href="{% url 'password_reset' %}" class="btn btn-outline-secondary">Recuperar senha</a>
-        <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary">Criar conta agora</a>
+        <a href="{% url 'account:login' %}" class="btn btn-outline-primary px-2 mx-auto" style="max-width: 210px;">
+            Já possuo uma conta</a>
 
     </form>
 

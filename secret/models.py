@@ -3,7 +3,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.core.validators import MinLengthValidator
 
-from accounts.models import User
+from account.models import User
 from .month.models import MonthField
 from .xor_db import xor
 from .choices import cards_banks, cards_brands, cards_types, credentials_services
@@ -118,7 +118,7 @@ class LoginCredential(models.Model):
             type(self.login),
             type(self.password),
         ] == [
-            "<class 'accounts.models.User'>",
+            "<class 'account.models.User'>",
             str,
             str,
             str,
@@ -292,7 +292,7 @@ class Card(models.Model):
             type(self.slug),
             type(self.owners_name),
         ] == [
-            "<class 'accounts.models.User'>",
+            "<class 'account.models.User'>",
             str,
             str,
             str,
@@ -380,7 +380,7 @@ class SecurityNote(models.Model):
             type(self.content),
             type(self.slug),
         ] == [
-            "<class 'accounts.models.User'>",
+            "<class 'account.models.User'>",
             str,
             str,
             str,

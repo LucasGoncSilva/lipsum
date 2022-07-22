@@ -1,7 +1,7 @@
 from django.test import TestCase
 from faker import Faker
 
-from accounts.models import User
+from account.models import User
 from secret.xor_db import xor
 
 

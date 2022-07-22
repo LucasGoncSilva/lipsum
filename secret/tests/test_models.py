@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from accounts.models import User
+from account.models import User
 from secret.models import Card, LoginCredential, SecurityNote
 from secret.month.models import Month
 from secret.xor_db import xor

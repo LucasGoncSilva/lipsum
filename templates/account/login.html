@@ -3,11 +3,11 @@
 {% load static %}
 
 
-{% block title %} Recuperação de Senha pt1/4 {% endblock %}
+{% block title %} Iniciar Sessão {% endblock %}
 
 
 {% block imports %}
-<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'account/css/style.css' %}">
 {% endblock %}
 
 
@@ -20,14 +20,10 @@
     <img src="{% static 'shared/img/logo.svg' %}" alt="Lipsum's icon, blue hexagon with gradient effects">
 
 
-    <form method="post" autocomplete="off">
+    <form action="{% url 'account:login' %}" method="post" autocomplete="off">
         {% csrf_token %}
 
-        <h1>Recuperar Senha</h1>
-        <h6>Esqueceu sua senha? Forneça seu endereço de e-mail abaixo, e nós te enviaremos instruções para configurar
-            uma nova.</h6>
-
-        <br>
+        <h1>Entrar</h1>
 
         {{ form|crispy }}
 
@@ -38,13 +34,13 @@
         {% endif %}
 
         <div>
-            <input id="confirm-btn" class="btn btn-primary mt-4" type="submit" value="Enviar e-mail">
+            <input id="confirm-btn" class="btn btn-primary mt-4" type="submit" value="Confirmar">
         </div>
 
         <br>
 
-        <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary">Já possuo conta</a>
-        <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary">Criar conta agora</a>
+        <a href="{% url 'password_reset' %}" class="btn btn-outline-secondary">Recuperar senha</a>
+        <a href="{% url 'account:register' %}" class="btn btn-outline-secondary">Criar conta agora</a>
 
     </form>
 
