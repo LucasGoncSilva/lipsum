@@ -131,12 +131,9 @@ def register_view(req: HttpRequest) -> HttpResponse:
             username: str = form.cleaned_data.get('username')
             email: str = form.cleaned_data.get('email')
 
-            if User.objects.filter(username=username).exists():
-                messages.error(req, 'Username indisponível')
-                return render(req, 'account/register.html', {'form': form})
-
-            if User.objects.filter(email=email).exists():
-                messages.error(req, 'E-mail indisponível')
+            if User.objects.filter(username=username).exists() \
+            or User.objects.filter(email=email).exists():
+                messages.error(req, 'Username e/ou e-mail indisponível')
                 return render(req, 'account/register.html', {'form': form})
 
             first_name: str = form.cleaned_data.get('first_name')
