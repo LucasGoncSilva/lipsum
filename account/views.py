@@ -186,7 +186,7 @@ def login_view(req: HttpRequest) -> HttpResponse:
     })
 
 
-@login_required
+@login_required(login_url='/conta/entrar')
 def logout_view(req: HttpRequest) -> HttpResponseRedirect:
     if req.method == 'POST':
         logout(req)
