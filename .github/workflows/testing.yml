@@ -32,6 +32,9 @@ jobs:
       run: |
         python manage.py makemigrations
         python manage.py migrate
+    - name: Collect staticfiles
+      run: |
+        python manage.py collectstatic --noinput
     - name: Run Tests
       run: |
-        python manage.py test --parallel
+        python manage.py test --parallel 4
