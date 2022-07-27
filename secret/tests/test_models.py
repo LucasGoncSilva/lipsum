@@ -12,7 +12,7 @@ class CredentialTestCase(TestCase):
         test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
-            email='test@email.com',
+            email='test_user@example.com',
             first_name='Test',
             last_name='User'
         )
@@ -223,7 +223,7 @@ class CardTestCase(TestCase):
         test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
-            email='test@email.com',
+            email='test_user@example.com',
             first_name='Test',
             last_name='User'
         )
@@ -429,7 +429,7 @@ class SecurityNoteTestCase(TestCase):
         test_user = User.objects.create_user(
             username='test_user',
             password='testing_password',
-            email='test@email.com',
+            email='test_user@example.com',
             first_name='Test',
             last_name='User'
         )

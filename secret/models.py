@@ -271,13 +271,13 @@ class Card(models.Model):
         return all(map(self.check_field_length, vars))
 
     def all_fields_present(self) -> bool:
-        return self.owner and self.name \
-            and self.card_type in [slug for slug, _ in cards_types] \
-                and self.number and self.expiration and self.cvv \
-                    and self.bank in [slug for slug, _ in cards_banks] \
-                        and self.brand in [slug for slug, _ in cards_brands] \
-                            and self.owners_name \
-                                and self.slug == f'{self.bank}{slugify(self.name)}'
+        return bool(self.owner and self.name \
+        and self.card_type in [slug for slug, _ in cards_types] \
+        and self.number and self.expiration and self.cvv \
+        and self.bank in [slug for slug, _ in cards_banks] \
+        and self.brand in [slug for slug, _ in cards_brands] \
+        and self.owners_name \
+        and self.slug == f'{self.bank}{slugify(self.name)}')
 
     def all_fields_of_correct_types(self) -> bool:
         if [
@@ -370,8 +370,8 @@ class SecurityNote(models.Model):
         return all(map(self.check_field_length, vars))
 
     def all_fields_present(self) -> bool:
-        return self.owner and self.title \
-            and self.content and self.slug == slugify(self.title)
+        return bool(self.owner and self.title \
+        and self.content and self.slug == slugify(self.title))
 
     def all_fields_of_correct_types(self) -> bool:
         if [
