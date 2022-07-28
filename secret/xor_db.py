@@ -1,4 +1,4 @@
-from LIPSUM.settings.base import SECRET_KEY
+from django.conf import settings
 
 
 def xor(text: str, key: str, encrypt: bool=True) -> str:
@@ -10,7 +10,7 @@ def xor(text: str, key: str, encrypt: bool=True) -> str:
     except:
         return text
 
-    SK: str = SECRET_KEY[16:]
+    SK: str = settings.SECRET_KEY[16:]
 
     # Set the same and sufficient len() for the key's parent
     keys_cat: list[tuple[str, str]] = list(zip(
