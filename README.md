@@ -170,7 +170,7 @@ Here you get a detailed view of the choosen secret, showing every information of
 <h2 align='center'>:memo: TO-DO LIST :memo:</h2>
 
 * Complete the [FEATURES](https://github.com/LucasGoncSilva/lipsum#star-features-star) list.
-* Create the `/sobre` and `/services` pages listing about Lipsum and it's services, respectively.
+* Create the `/sobre` and `/serviços` pages listing about Lipsum and it's services, respectively.
 * Improve UI feedback information about chars count on input fields.
 
 
