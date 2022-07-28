@@ -1,0 +1,11 @@
+# App running
+Django==4.0.4
+django-crispy-forms==1.14.0
+django-environ==0.8.1
+django-monthfield==0.1.3
+django-simple-captcha==0.5.17
+gunicorn==20.1.0
+newrelic==7.14.0.177
+Pillow==9.1.1
+psycopg2==2.9.3
+whitenoise==6.0.0

@@ -20,7 +20,7 @@ class XORTestCase(TestCase):
     def test_xor_null_value(self):
         """Tests if xor() retuns a NULL (\x00) value"""
 
-        UNIVERSE = 100000
+        UNIVERSE = 100_000
         password = User.objects.get(pk=1).password
         
         encrypted_usernames = [xor(self.f.simple_profile()['username'], password[21:]) for _ in range(UNIVERSE)]

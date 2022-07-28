@@ -1,0 +1,4 @@
+-r ./prod.txt
+
+# Dev running
+Faker==13.14.0
