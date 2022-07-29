@@ -23,12 +23,12 @@ def xor(text: str, key: str, encrypt: bool=True) -> str:
 
     # Get the code value for each char in text
     if encrypt:
-        text_list: list[int] = [ord(i) for i in text]
+        num_val_list: list[int] = [ord(i) for i in text]
     else:
-        text_list: list[int] = [(ord(i) - 32) for i in text]
+        num_val_list: list[int] = [(ord(i) - 32) for i in text]
 
-    # Set the same len() for text_list and xor_key
-    text_cat: list[tuple[int, int]] = list(zip(text_list, xor_key))
+    # Set the same len() for num_val_list and xor_key
+    text_cat: list[tuple[int, int]] = list(zip(num_val_list, xor_key))
 
     # XOR the text
     if encrypt:
